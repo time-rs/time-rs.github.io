@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Integer","Marker trait for all integer types, including `NonZero*`"],["IntegerParseBytes","Equivalent of `foo.parse()` for slices."]]});
