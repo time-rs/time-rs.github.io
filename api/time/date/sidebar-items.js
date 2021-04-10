@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["MAX_YEAR","The maximum valid year."],["MIN_YEAR","The minimum valid year."]],"struct":[["Date","Date in the proleptic Gregorian calendar."]]});

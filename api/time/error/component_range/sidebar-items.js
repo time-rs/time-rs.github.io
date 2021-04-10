@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ComponentRange","An error type indicating that a component provided to a method was out of range, causing a failure."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["consume_whitespace","Consume all leading whitespace, advancing `index` as appropriate."]]});

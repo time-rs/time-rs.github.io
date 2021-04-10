@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["local_offset_at","Attempt to obtain the system’s UTC offset. If the offset cannot be determined, `None` is returned."]],"struct":[["UtcOffset","An offset from UTC."]]});

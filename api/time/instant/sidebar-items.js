@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Instant","A measurement of a monotonically non-decreasing clock. Opaque and useful only with [`Duration`]."]]});
