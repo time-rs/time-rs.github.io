@@ -1,0 +1,432 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Time</title>
+        
+        <meta name="robots" content="noindex" />
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="index.html">What is Time?</a></li><li class="chapter-item expanded "><a href="intro/what-time-can-do.html">What Time can do</a></li><li class="chapter-item expanded "><a href="intro/what-time-cant-do.html">What Time can't do</a></li><li class="chapter-item expanded "><a href="intro/limitations-and-alternatives.html">Limitations and alternatives</a></li><li class="chapter-item expanded affix "><li class="part-title">API</li><li class="chapter-item expanded "><a href="api/construction.html">Construction</a></li><li class="chapter-item expanded "><a href="api/conversion-between-types.html">Conversion between types</a></li><li class="chapter-item expanded "><a href="api/arithmetic.html">Arithmetic</a></li><li class="chapter-item expanded "><a href="api/format-description.html">Format description</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api/well-known-format-descriptions.html">Well known format descriptions</a></li></ol></li><li class="chapter-item expanded "><a href="api/formatting.html">Formatting</a></li><li class="chapter-item expanded "><a href="api/parsing.html">Parsing</a></li><li class="chapter-item expanded "><a href="api/macros.html">Macros</a></li><li class="chapter-item expanded "><a href="api/extension-traits.html">Extension traits</a></li><li class="chapter-item expanded "><a href="api/utility-functions.html">Utility functions</a></li><li class="chapter-item expanded "><a href="api/interop-with-stdlib.html">Interop with stdlib</a></li><li class="chapter-item expanded "><a href="api/feature-flags.html">Feature flags</a></li><li class="chapter-item expanded affix "><li class="part-title">Third-party trait impls</li><li class="chapter-item expanded "><a href="third-party/serde.html">serde</a></li><li class="chapter-item expanded "><a href="third-party/rand.html">rand</a></li><li class="chapter-item expanded "><a href="third-party/quickcheck.html">quickcheck</a></li><li class="chapter-item expanded affix "><li class="part-title">Future</li><li class="chapter-item expanded "><a href="future/guarantees.html">Guarantees</a></li><li class="chapter-item expanded "><a href="future/period-type.html">Period type</a></li><li class="chapter-item expanded "><a href="future/tzdb-support.html">tzdb support</a></li><li class="chapter-item expanded affix "><li class="part-title">Migration guide</li><li class="chapter-item expanded "><a href="migration/0.3.html">0.2 to 0.3</a></li><li class="chapter-item expanded affix "><li class="part-title">Internals</li><li class="chapter-item expanded "><a href="internals/disclaimer.html">Disclaimer</a></li><li class="chapter-item expanded "><a href="internals/date-algorithms.html">Date algorithms</a></li><li class="chapter-item expanded "><a href="internals/internal-representation.html">Internal representation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="internals/hacks.html">Hacks</a></li></ol></li><li class="chapter-item expanded "><a href="internals/testing.html">Testing</a></li><li class="chapter-item expanded "><a href="internals/benchmarks.html">Benchmarks</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="resources.html">Resources</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Time</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/time-rs/time" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="what-is-time"><a class="header" href="#what-is-time">What is Time?</a></h1>
+<h1 id="what-time-can-do"><a class="header" href="#what-time-can-do">What Time can do</a></h1>
+<h1 id="what-time-cant-do"><a class="header" href="#what-time-cant-do">What Time can't do</a></h1>
+<h1 id="limitations-and-alternatives"><a class="header" href="#limitations-and-alternatives">Limitations and alternatives</a></h1>
+<h1 id="construction"><a class="header" href="#construction">Construction</a></h1>
+<h1 id="conversion-between-types"><a class="header" href="#conversion-between-types">Conversion between types</a></h1>
+<h1 id="arithmetic"><a class="header" href="#arithmetic">Arithmetic</a></h1>
+<style>
+@media not print {
+  .ayu img[src$='#rr'], .navy img[src$='#rr'], .coal img[src$='#rr'] {
+    filter: invert(0.8) hue-rotate(180deg);
+  }
+}
+</style>
+<h1 id="format-description"><a class="header" href="#format-description">Format description</a></h1>
+<p>A format description is the manner in which the time crate knows how a value should be formatted and
+parsed. However, a format description is not a single type; it is instead represented by two
+internal traits (one for formatting and one for parsing) that are implemented by a number of types.
+Currently, all types that implement one trait also implement the other, but this is not guaranteed.</p>
+<p>The following types currently implement both the <code>Formattable</code> and <code>Parsable</code> traits:</p>
+<ul>
+<li><code>&amp;[FormatItem&lt;'_&gt;]</code></li>
+<li><code>Vec&lt;FormatItem&lt;'_&gt;&gt;</code> <small>(when the <code>alloc</code> feature is enabled)</small></li>
+<li><code>FormatItem&lt;'_&gt;</code></li>
+<li>All <a href="api/./well-known-format-descriptions.html">well known formats</a></li>
+</ul>
+<p>While it is possible to construct a value manually, this is generally not recommended, as it is more
+tedious and less readable than the alternative. Unless you are constructing a <code>FormatItem</code> manually,
+you will likely never need to know anything about it other than that it is produced by the
+<code>format_description!</code> macro or <code>format_description::parse</code> method.</p>
+<p>If the format description is statically known, you should use the <code>format_description!</code> macro. This
+is identical to the <code>format_description::parse</code> method, but runs at compile-time, throwing an error
+if the format description is invalid. If you do not know the desired format statically (such as if
+you are using one provided by the user), you should use the <code>format_description::parse</code> method,
+which is fallible.</p>
+<p>Format descriptions have <strong>components</strong> and <strong>literals</strong>. Literals are formatted and parsed as-is.
+Components are the mechanism by which values (such as a <code>Time</code> or <code>Date</code>) are dynamically formatted
+and parsed. They have significant flexibility, allowing for differences in padding, variable widths
+for subsecond values, numerical or textual representations, and more.</p>
+<p>The syntax for the method and the macro is identical.</p>
+<p><img src="api/../diagrams/abbreviated.svg#rr" alt="syntax for full format description" /></p>
+<p>Either a literal or a component may be present at the start of the format description. It is valid
+to have both consecutive literals and consecutive components. Components must be fully contained
+between brackets with optional whitespace. If a literal <code>[</code> is desired, it must be escaped with a
+second bracket. A closing bracket need not be escaped if alone.</p>
+<p>Follows is the syntax for all components. Any of the following may be used where <em>component</em> is
+present in the above diagram.</p>
+<ul>
+<li>
+<p><strong>Day of month</strong></p>
+<p><img src="api/../diagrams/day.svg#rr" alt="syntax for day component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+</li>
+<li>
+<p><strong>Clock hour</strong></p>
+<p><img src="api/../diagrams/hour.svg#rr" alt="syntax for hour component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spacing, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>Users have the option to choose between two representations. One is the 12-hour clock, frequently
+used in the Anglosphere, while the alternative (the 24-hour clock) is frequently used elsewhere.
+The 12-hour clock is typically used in conjunction with AM/PM.</p>
+</li>
+<li>
+<p><strong>Minute within the clock hour</strong></p>
+<p><img src="api/../diagrams/minute.svg#rr" alt="syntax for minute component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+</li>
+<li>
+<p><strong>Month</strong></p>
+<p><img src="api/../diagrams/month.svg#rr" alt="syntax for month component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>Users have the option to choose between three representations. The default is numerical.
+Alternatives are <em>long</em> and <em>short</em>, both of which are textual formats and have no padding. The
+long format is the full English name of the month, while the short format is the first three
+letters of it.</p>
+</li>
+<li>
+<p><strong>Whole hours offset from UTC</strong></p>
+<p><img src="api/../diagrams/offset_hour.svg#rr" alt="syntax for offset hour component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>Users have the option to choose whether the sign is <em>automatic</em> (the default) or <em>mandatory</em>.
+If the sign is automatic, it will only be present when the value is negative. If mandatory, it
+will always be present.</p>
+</li>
+<li>
+<p><strong>Minutes within the hour offset from UTC</strong></p>
+<p><img src="api/../diagrams/offset_minute.svg#rr" alt="syntax for offset minute component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>This value is always positive. As such, it has no sign.</p>
+</li>
+<li>
+<p><strong>Seconds within the minute offset from UTC</strong></p>
+<p><img src="api/../diagrams/offset_second.svg#rr" alt="syntax for offset second component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>This value is always positive. As such, it has no sign.</p>
+</li>
+<li>
+<p><strong>Day of year</strong></p>
+<p><img src="api/../diagrams/ordinal.svg#rr" alt="syntax for ordinal component" /></p>
+<p>The padded value has a width of 3. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+</li>
+<li>
+<p><strong>AM/PM</strong></p>
+<p><img src="api/../diagrams/period.svg#rr" alt="syntax for period component" /></p>
+<p>Users have the option to choose whether the value is uppercase or lowercase. This component is
+typically used in conjunction with the hour of the day with <code>repr:12</code>.</p>
+</li>
+<li>
+<p><strong>Second within the clock minute</strong></p>
+<p><img src="api/../diagrams/second.svg#rr" alt="syntax for second component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+</li>
+<li>
+<p><strong>Subsecond within the clock second</strong></p>
+<p><img src="api/../diagrams/subsecond.svg#rr" alt="syntax for subsecond component" /></p>
+<p>Users have the choice of how many digits should be displayed or parsed. By default, this is
+one or more, where the minimum number of digits will be used when formatting and any nonzero
+number of digits are accepted by the parser (though digits after the ninth will be discarded).
+There is the option to require a fixed number of digits between one and nine. When formatting, the
+value is not rounded if more digits would otherwise be present.</p>
+</li>
+<li>
+<p><strong>Week of the year</strong></p>
+<p><img src="api/../diagrams/week_number.svg#rr" alt="syntax for week number component" /></p>
+<p>The padded value has a width of 2. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>Users can choose between three representations: <em>iso</em> (the default), <em>sunday</em>, and <em>monday</em>. ISO
+week numbers are in between 1 and 53, while others are between 0 and 53. ISO week one is the
+Monday-to-Sunday week that contains January 4. Week one of other representations begins on the
+first instance of that day in the calendar year (e.g. Sunday-based week numbering has week one
+start on the first Sunday of the year).</p>
+</li>
+<li>
+<p><strong>Day of the week</strong></p>
+<p><img src="api/../diagrams/weekday.svg#rr" alt="syntax for weekday component" /></p>
+<p>Users can choose between a number of representations for the day of the week. There are <em>long</em>
+(the default) and <em>short</em>, both of which are textual representations; the long representation is
+the weekday's full name in English, while the short is the first three letters. There are also
+<em>sunday</em> and <em>monday</em> representations, which are numerical. These formats are either zero to six
+or one to seven (depending on whether <code>one_indexed</code> is false or true, respectively), with the
+named day being at the start of that range.</p>
+</li>
+<li>
+<p><strong>Year</strong></p>
+<p><img src="api/../diagrams/year.svg#rr" alt="syntax for year component" /></p>
+<p>The padded value has a width of 4. You can choose between padding with zeroes, spaces, or having
+no padding at all. The default is to pad the value with zeroes.</p>
+<p>Users can choose between two representations: the full year (the default) and the last two digits
+of the year. This should be relatively straightforward. Note that when parsing, if only the last
+two digits of the year are present, the value returned may not be what was expected — if the
+return is successful at all (it's not guaranteed).</p>
+<p>There are two bases for the year: <em>calendar</em> and <em>iso_week</em>. The former is what you want if using
+the month, day, ordinal, or similar. You likely only want to use <code>iso_week</code> if you are using the
+week number with <code>repr:iso</code>. <a href="api/twitter-bug">Don't be like Twitter</a>; know which should be used when.</p>
+<p>Users have the option to choose whether the sign is <em>automatic</em> (the default) or <em>mandatory</em>.
+If the sign is automatic, it will only be present when the value is negative <em>or</em> if the
+<code>large-dates</code> feature is enabled and the value contains more than four digits. If mandatory, it
+will always be present.</p>
+<p>When the <code>large-dates</code> feature is enabled, ambiguities may exist when parsing. For example, if a
+year is immediately followed by the week number, the parser will eagerly consume six digits even
+if the year should only be four and the week number the remaining two.</p>
+</li>
+</ul>
+<h1 id="well-known-format-descriptions"><a class="header" href="#well-known-format-descriptions">Well known format descriptions</a></h1>
+<h1 id="formatting"><a class="header" href="#formatting">Formatting</a></h1>
+<h1 id="parsing"><a class="header" href="#parsing">Parsing</a></h1>
+<h1 id="macros"><a class="header" href="#macros">Macros</a></h1>
+<h1 id="extension-traits"><a class="header" href="#extension-traits">Extension traits</a></h1>
+<h1 id="utility-functions"><a class="header" href="#utility-functions">Utility functions</a></h1>
+<h1 id="interop-with-stdlib"><a class="header" href="#interop-with-stdlib">Interop with stdlib</a></h1>
+<h1 id="feature-flags"><a class="header" href="#feature-flags">Feature flags</a></h1>
+<h1 id="serde"><a class="header" href="#serde">serde</a></h1>
+<h1 id="rand"><a class="header" href="#rand">rand</a></h1>
+<h1 id="quickcheck"><a class="header" href="#quickcheck">quickcheck</a></h1>
+<h1 id="guarantees"><a class="header" href="#guarantees">Guarantees</a></h1>
+<h1 id="period-type"><a class="header" href="#period-type">Period type</a></h1>
+<h1 id="tzdb-support"><a class="header" href="#tzdb-support">tzdb support</a></h1>
+<h1 id="02-to-03"><a class="header" href="#02-to-03">0.2 to 0.3</a></h1>
+<h1 id="disclaimer"><a class="header" href="#disclaimer">Disclaimer</a></h1>
+<h1 id="date-algorithms"><a class="header" href="#date-algorithms">Date algorithms</a></h1>
+<h1 id="internal-representation"><a class="header" href="#internal-representation">Internal representation</a></h1>
+<h1 id="hacks"><a class="header" href="#hacks">Hacks</a></h1>
+<h1 id="testing"><a class="header" href="#testing">Testing</a></h1>
+<h1 id="benchmarks"><a class="header" href="#benchmarks">Benchmarks</a></h1>
+<h1 id="resources"><a class="header" href="#resources">Resources</a></h1>
+<ul>
+<li><a href="https://github.com/time-rs/time">GitHub</a></li>
+<li><a href="https://github.com/time-rs/time/issues">Issue tracker</a></li>
+<li><a href="https://github.com/time-rs/time/discussions">Discussions</a></li>
+<li><a href="https://crates.io/crates/time">crates.io</a></li>
+<li><a href="https://docs.rs/time">docs.rs</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

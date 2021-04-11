@@ -1,0 +1,55 @@
+<svg class="" height="191" viewBox="0 0 552.0 191" width="552.0" xmlns="http://www.w3.org/2000/svg">
+<g>
+<style>/* <![CDATA[ */
+
+path {
+    stroke-width:2;
+    stroke:#000;
+    fill:transparent;
+}
+text {
+    font:13px monospace;
+    text-anchor:middle;
+}
+text.label{
+    text-anchor:start;
+}
+text.comment{
+    font:12px monospace;
+    opacity:0.8;
+}
+rect{
+    stroke-width:2;
+    stroke:#000;
+    fill:transparent;
+}
+rect.group-box {
+    stroke:gray;
+    stroke-dasharray:10 5;
+    fill:none;
+}
+
+/* ]]> */
+</style><g>
+<path d="M1 11v20m10 -20v20m-10 -10h20"></path></g><path d="M21 21h10"></path><g>
+<path d="M31 21h0.0"></path><path d="M521.0 21h0.0"></path><g class="terminal ">
+<path d="M31.0 21h0.0"></path><path d="M133.5 21h0.0"></path><rect height="22" rx="10" ry="10" width="102.5" x="31.0" y="10"></rect><text x="82.25" y="25">week&#95;number</text></g><path d="M133.5 21h10"></path><g>
+<path d="M143.5 21h0.0"></path><path d="M521.0 21h0.0"></path><path d="M143.5 21a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10"></path><g>
+<path d="M163.5 1h337.5"></path></g><path d="M501.0 1a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10"></path><path d="M143.5 21h20"></path><g>
+<path d="M163.5 21h0.0"></path><path d="M501.0 21h0.0"></path><path d="M163.5 21h10"></path><g>
+<path d="M173.5 21h0.0"></path><path d="M491.0 21h0.0"></path><g class="non-terminal ">
+<path d="M173.5 21h0.0"></path><path d="M253.5 21h0.0"></path><text class="comment" x="213.5" y="26">whitespace</text></g><path d="M253.5 21h10"></path><g>
+<path d="M263.5 21h0.0"></path><path d="M491.0 21h0.0"></path><path d="M263.5 21h20"></path><g>
+<path d="M283.5 21h0.0"></path><path d="M471.0 21h0.0"></path><g class="terminal ">
+<path d="M283.5 21h0.0"></path><path d="M363.5 21h0.0"></path><rect height="22" rx="10" ry="10" width="80.0" x="283.5" y="10"></rect><text x="323.5" y="25">padding:</text></g><path d="M363.5 21h10"></path><g>
+<path d="M373.5 21h0.0"></path><path d="M471.0 21h0.0"></path><path d="M373.5 21h20"></path><g class="terminal ">
+<path d="M393.5 21h3.75"></path><path d="M447.25 21h3.75"></path><rect height="22" rx="10" ry="10" width="50.0" x="397.25" y="10"></rect><text x="422.25" y="25">zero</text></g><path d="M451.0 21h20"></path><path d="M373.5 21a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path><g class="terminal ">
+<path d="M393.5 51h0.0"></path><path d="M451.0 51h0.0"></path><rect height="22" rx="10" ry="10" width="57.5" x="393.5" y="40"></rect><text x="422.25" y="55">space</text></g><path d="M451.0 51a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path><path d="M373.5 21a10 10 0 0 1 10 10v40a10 10 0 0 0 10 10"></path><g class="terminal ">
+<path d="M393.5 81h3.75"></path><path d="M447.25 81h3.75"></path><rect height="22" rx="10" ry="10" width="50.0" x="397.25" y="70"></rect><text x="422.25" y="85">none</text></g><path d="M451.0 81a10 10 0 0 0 10 -10v-40a10 10 0 0 1 10 -10"></path></g></g><path d="M471.0 21h20"></path><path d="M263.5 21a10 10 0 0 1 10 10v70a10 10 0 0 0 10 10"></path><g>
+<path d="M283.5 111h7.5"></path><path d="M463.5 111h7.5"></path><g class="terminal ">
+<path d="M291.0 111h0.0"></path><path d="M348.5 111h0.0"></path><rect height="22" rx="10" ry="10" width="57.5" x="291.0" y="100"></rect><text x="319.75" y="115">repr:</text></g><path d="M348.5 111h10"></path><g>
+<path d="M358.5 111h0.0"></path><path d="M463.5 111h0.0"></path><path d="M358.5 111h20"></path><g class="terminal ">
+<path d="M378.5 111h11.25"></path><path d="M432.25 111h11.25"></path><rect height="22" rx="10" ry="10" width="42.5" x="389.75" y="100"></rect><text x="411.0" y="115">iso</text></g><path d="M443.5 111h20"></path><path d="M358.5 111a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10"></path><g class="terminal ">
+<path d="M378.5 141h0.0"></path><path d="M443.5 141h0.0"></path><rect height="22" rx="10" ry="10" width="65.0" x="378.5" y="130"></rect><text x="411.0" y="145">sunday</text></g><path d="M443.5 141a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10"></path><path d="M358.5 111a10 10 0 0 1 10 10v40a10 10 0 0 0 10 10"></path><g class="terminal ">
+<path d="M378.5 171h0.0"></path><path d="M443.5 171h0.0"></path><rect height="22" rx="10" ry="10" width="65.0" x="378.5" y="160"></rect><text x="411.0" y="175">monday</text></g><path d="M443.5 171a10 10 0 0 0 10 -10v-40a10 10 0 0 1 10 -10"></path></g></g><path d="M471.0 111a10 10 0 0 0 10 -10v-70a10 10 0 0 1 10 -10"></path></g></g><path d="M491.0 21h10"></path><path d="M173.5 21a10 10 0 0 0 -10 10v149a10 10 0 0 0 10 10"></path><g>
+<path d="M173.5 190h317.5"></path></g><path d="M491.0 190a10 10 0 0 0 10 -10v-149a10 10 0 0 0 -10 -10"></path></g><path d="M501.0 21h20"></path></g></g><path d="M521.0 21h10"></path><path d="M 531.0 21 h 20 m -10 -10 v 20 m 10 -20 v 20"></path></g></svg>
