@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Component","A component of a larger format description."],["NakedComponent","A component with no modifiers present."]]});
