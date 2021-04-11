@@ -35,7 +35,7 @@ body {
     text-align: center;
 
     display: grid;
-    grid-template: auto / repeat(2, 1fr);
+    grid-template: auto / repeat(3, 1fr);
     grid-auto-rows: 1fr;
     gap: 2rem;
 }
