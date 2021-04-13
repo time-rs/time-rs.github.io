@@ -286,6 +286,7 @@
 <span id="285">285</span>
 <span id="286">286</span>
 <span id="287">287</span>
+<span id="288">288</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! A trait that can be used to parse an item from an input.</span>
 
@@ -501,7 +502,8 @@
         <span class="kw">let</span> <span class="ident">dash</span> <span class="op">=</span> <span class="ident">ascii_char</span>(<span class="string">b&#39;-&#39;</span>);
         <span class="kw">let</span> <span class="ident">colon</span> <span class="op">=</span> <span class="ident">ascii_char</span>(<span class="string">b&#39;:&#39;</span>);
 
-        <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">year</span>) <span class="op">=</span> <span class="ident">exactly_n_digits</span>(<span class="number">4</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;year&quot;</span>))<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">year</span>) <span class="op">=</span>
+            <span class="ident">exactly_n_digits</span>::<span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>(<span class="number">4</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;year&quot;</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">dash</span>(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidLiteral</span>)<span class="question-mark">?</span>.<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">month</span>) <span class="op">=</span>
             <span class="ident">exactly_n_digits</span>(<span class="number">2</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;month&quot;</span>))<span class="question-mark">?</span>;
@@ -542,19 +544,19 @@
                 <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">offset_sign</span>) <span class="op">=</span>
                     <span class="ident">sign</span>(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;offset_hour&quot;</span>))<span class="question-mark">?</span>;
                 <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">offset_hour</span>) <span class="op">=</span>
-                    <span class="ident">exactly_n_digits</span>::<span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span>(<span class="number">2</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;offset_hour&quot;</span>))<span class="question-mark">?</span>;
+                    <span class="ident">exactly_n_digits</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="number">2</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;offset_hour&quot;</span>))<span class="question-mark">?</span>;
                 <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">colon</span>(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidLiteral</span>)<span class="question-mark">?</span>.<span class="ident">unwrap</span>();
                 <span class="kw">let</span> <span class="ident">ParsedItem</span>(<span class="ident">input</span>, <span class="ident">offset_minute</span>) <span class="op">=</span>
-                    <span class="ident">exactly_n_digits</span>(<span class="number">2</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;offset_minute&quot;</span>))<span class="question-mark">?</span>;
+                    <span class="ident">exactly_n_digits</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="number">2</span>)(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;offset_minute&quot;</span>))<span class="question-mark">?</span>;
                 <span class="ident">ParsedItem</span>(
                     <span class="ident">input</span>,
                     <span class="ident">UtcOffset::from_hms</span>(
                         <span class="kw">if</span> <span class="ident">offset_sign</span> <span class="op">=</span><span class="op">=</span> <span class="string">b&#39;-&#39;</span> {
-                            <span class="op">-</span><span class="ident">offset_hour</span>
+                            <span class="op">-</span>(<span class="ident">offset_hour</span> <span class="kw">as</span> <span class="ident">i8</span>)
                         } <span class="kw">else</span> {
-                            <span class="ident">offset_hour</span>
+                            <span class="ident">offset_hour</span> <span class="kw">as</span> <span class="kw">_</span>
                         },
-                        <span class="ident">offset_minute</span>,
+                        <span class="ident">offset_minute</span> <span class="kw">as</span> <span class="kw">_</span>,
                         <span class="number">0</span>,
                     )
                     .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>,
@@ -566,7 +568,7 @@
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::Parse::UnexpectedTrailingCharacters</span>);
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">Date::from_calendar_date</span>(<span class="ident">year</span>, <span class="ident">month</span>, <span class="ident">day</span>)
+        <span class="prelude-val">Ok</span>(<span class="ident">Date::from_calendar_date</span>(<span class="ident">year</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">month</span>, <span class="ident">day</span>)
             .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
             .<span class="ident">with_hms_nano</span>(<span class="ident">hour</span>, <span class="ident">minute</span>, <span class="ident">second</span>, <span class="ident">nanosecond</span>)
             .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
