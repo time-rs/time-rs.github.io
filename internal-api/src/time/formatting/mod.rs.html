@@ -410,8 +410,9 @@
 <span id="409">409</span>
 <span id="410">410</span>
 <span id="411">411</span>
+<span id="412">412</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="doccomment">//! Formatting for the time crate.</span>
+<span class="doccomment">//! Formatting for various types.</span>
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">formattable</span>;
 
@@ -420,10 +421,11 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="ident">standback::prelude</span>::<span class="kw-2">*</span>;
 
+<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span><span class="ident">::formattable::Formattable</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description</span>::{<span class="ident">modifier</span>, <span class="ident">Component</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>};
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::clippy::missing_docs_in_private_items</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::missing_docs_in_private_items</span>)]</span>
 <span class="kw">const</span> <span class="ident">MONTH_NAMES</span>: [<span class="kw-2">&amp;</span>[<span class="ident">u8</span>]; <span class="number">12</span>] <span class="op">=</span> [
     <span class="string">b&quot;January&quot;</span>,
     <span class="string">b&quot;February&quot;</span>,
@@ -823,5 +825,5 @@
 }
 <span class="comment">// endregion offset formatters</span>
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="time" data-search-js="../../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="time" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script></body></html>

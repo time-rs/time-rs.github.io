@@ -287,6 +287,16 @@
 <span id="286">286</span>
 <span id="287">287</span>
 <span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! A trait that can be used to parse an item from an input.</span>
 
@@ -298,20 +308,30 @@
 <span class="kw">use</span> <span class="ident">standback::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::TryFromParsed</span>;
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description</span>::{<span class="ident">well_known</span>, <span class="ident">FormatItem</span>};
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description::well_known::Rfc3339</span>;
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description::FormatItem</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parsing</span>::{<span class="ident">Parsed</span>, <span class="ident">ParsedItem</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>};
 
+<span class="doccomment">/// A type that can be parsed.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Parsable</span>: <span class="ident">sealed::Sealed</span> {}
+<span class="kw">impl</span> <span class="ident">Parsable</span> <span class="kw">for</span> <span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span> <span class="ident">Parsable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span>[<span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] {}
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)))]</span>
+<span class="kw">impl</span> <span class="ident">Parsable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span> <span class="ident">Parsable</span> <span class="kw">for</span> <span class="ident">Rfc3339</span> {}
+
 <span class="doccomment">/// Seal the trait to prevent downstream users from implementing it, while still allowing it to</span>
 <span class="doccomment">/// exist in generic bounds.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">sealed</span> {
+<span class="kw">mod</span> <span class="ident">sealed</span> {
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::wildcard_imports</span>)]</span>
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="doccomment">/// Parse the item using a format description and an input.</span>
     <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)))]</span>
-    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Parsable</span> {
+    <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Sealed</span> {
         <span class="doccomment">/// Parse the item into the provided [`Parsed`] struct.</span>
         <span class="doccomment">///</span>
         <span class="doccomment">/// This method can be used to parse a single component without parsing the full value.</span>
@@ -362,7 +382,7 @@
 }
 
 <span class="comment">// region: custom formats</span>
-<span class="kw">impl</span> <span class="ident">sealed::Parsable</span> <span class="kw">for</span> <span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">sealed::Sealed</span> <span class="kw">for</span> <span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">parse_into</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="kw-2">mut</span> <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
@@ -381,7 +401,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">sealed::Parsable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span>[<span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] {
+<span class="kw">impl</span> <span class="ident">sealed::Sealed</span> <span class="kw">for</span> <span class="kw-2">&amp;</span>[<span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] {
     <span class="kw">fn</span> <span class="ident">parse_into</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="kw-2">mut</span> <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
@@ -396,7 +416,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;alloc&quot;</span>)))]</span>
-<span class="kw">impl</span> <span class="ident">sealed::Parsable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">sealed::Sealed</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">parse_into</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
@@ -408,7 +428,7 @@
 <span class="comment">// endregion custom formats</span>
 
 <span class="comment">// region: well-known formats</span>
-<span class="kw">impl</span> <span class="ident">sealed::Parsable</span> <span class="kw">for</span> <span class="ident">well_known::Rfc3339</span> {
+<span class="kw">impl</span> <span class="ident">sealed::Sealed</span> <span class="kw">for</span> <span class="ident">Rfc3339</span> {
     <span class="kw">fn</span> <span class="ident">parse_into</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">u8</span>],
@@ -577,5 +597,5 @@
 }
 <span class="comment">// endregion well-known formats</span>
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="time" data-search-js="../../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="time" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script></body></html>

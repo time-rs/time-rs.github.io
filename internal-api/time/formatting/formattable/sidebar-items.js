@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["sealed","Seal the trait to prevent downstream users from implementing it, while still allowing it to exist in generic bounds."]]});
+initSidebarItems({"mod":[["sealed","Seal the trait to prevent downstream users from implementing it."]],"trait":[["Formattable","A type that can be formatted."]]});

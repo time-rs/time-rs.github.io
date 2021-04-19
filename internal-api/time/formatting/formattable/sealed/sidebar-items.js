@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Formattable","Format the item using a format description, the intended output, and the various components."]]});
+initSidebarItems({"trait":[["Sealed","Format the item using a format description, the intended output, and the various components."]]});
