@@ -326,8 +326,6 @@
 <span id="325">325</span>
 <span id="326">326</span>
 <span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! # Feature flags</span>
 <span class="doccomment">//!</span>
@@ -537,7 +535,6 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">ident</span> <span class="kw">in</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">_start</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>;
         <span class="kw">let</span> <span class="ident">_end</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>;
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::manual_range_contains</span>)]</span> <span class="comment">// rust-lang/rust-clippy#6373</span>
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">trivial_numeric_casts</span>, <span class="ident">unused_comparisons</span>)]</span>
         <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="op">&lt;</span> <span class="ident">_start</span> <span class="op">|</span><span class="op">|</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="op">&gt;</span> <span class="ident">_end</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="kw">crate</span><span class="ident">::error::ComponentRange</span> {
@@ -553,7 +550,6 @@
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">ident</span> <span class="ident">conditionally</span> <span class="kw">in</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">_start</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>;
         <span class="kw">let</span> <span class="ident">_end</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>;
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::manual_range_contains</span>)]</span> <span class="comment">// rust-lang/rust-clippy#6373</span>
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">trivial_numeric_casts</span>, <span class="ident">unused_comparisons</span>)]</span>
         <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="op">&lt;</span> <span class="ident">_start</span> <span class="op">|</span><span class="op">|</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="op">&gt;</span> <span class="ident">_end</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="kw">crate</span><span class="ident">::error::ComponentRange</span> {
@@ -609,7 +605,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">format_description</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)))]</span>
-<span class="kw">mod</span> <span class="ident">formatting</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">formatting</span>;
 <span class="doccomment">/// The [`Instant`] struct and its associated `impl`s.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)))]</span>
@@ -659,5 +655,5 @@
 <span class="doccomment">/// An alias for [`std::result::Result`] with a generic error from the time crate.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">core::result::Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="time" data-search-js="../../search-index.js"></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="time" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
