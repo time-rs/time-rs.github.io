@@ -181,9 +181,9 @@ internal traits (one for formatting and one for parsing) that are implemented by
 Currently, all types that implement one trait also implement the other, but this is not guaranteed.</p>
 <p>The following types currently implement both the <code>Formattable</code> and <code>Parsable</code> traits:</p>
 <ul>
-<li><code>&amp;[FormatItem&lt;'_&gt;]</code></li>
-<li><code>Vec&lt;FormatItem&lt;'_&gt;&gt;</code> <small>(when the <code>alloc</code> feature is enabled)</small></li>
 <li><code>FormatItem&lt;'_&gt;</code></li>
+<li><code>[FormatItem&lt;'_&gt;]</code></li>
+<li><code>T where &lt;T as Deref&gt;::Target: Formattable</code> (or <code>Parsable</code>)</li>
 <li>All <a href="./well-known-format-descriptions.html">well known formats</a></li>
 </ul>
 <p>While it is possible to construct a value manually, this is generally not recommended, as it is more
