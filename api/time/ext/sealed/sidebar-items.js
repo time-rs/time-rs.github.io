@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["Sealed","A trait that cannot be implemented by downstream users."]]});

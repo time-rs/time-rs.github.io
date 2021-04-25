@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Padding","By explicitly inserting this enum where padding is expected, the compiler is able to better perform niche value optimization."]],"struct":[["Duration","A span of time with nanosecond precision."]]});

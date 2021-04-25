@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["UNIX_EPOCH_JULIAN_DAY","The Julian day of the Unix epoch."]],"struct":[["OffsetDateTime","A [`PrimitiveDateTime`] with a [`UtcOffset`]."]]});
