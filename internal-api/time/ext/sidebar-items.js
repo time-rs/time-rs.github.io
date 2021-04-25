@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["NumericalDuration","Create [`Duration`]s from primitive and core numeric types."],["NumericalStdDuration","Create [`std::time::Duration`]s from primitive and core numeric types."]]});
+initSidebarItems({"mod":[["sealed","Sealed trait to prevent downstream implementations."]],"trait":[["NumericalDuration","Create [`Duration`]s from primitive and core numeric types."],["NumericalStdDuration","Create [`std::time::Duration`]s from primitive and core numeric types."]]});
