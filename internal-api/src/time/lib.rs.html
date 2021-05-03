@@ -321,11 +321,6 @@
 <span id="320">320</span>
 <span id="321">321</span>
 <span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! # Feature flags</span>
 <span class="doccomment">//!</span>
@@ -494,38 +489,33 @@
 
 <span class="doccomment">/// Cascade an out-of-bounds value.</span>
 <span class="macro">macro_rules!</span> <span class="ident">cascade</span> {
-    (@<span class="ident">discard_if_underscore</span>(<span class="kw">_</span>); $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {};
-    (@<span class="ident">discard_if_underscore</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">i</span>:<span class="ident">ident</span>); $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="op">*</span> };
-    (@<span class="ident">discard_if_not_mut</span>(<span class="kw-2">mut</span>); $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {};
-    (@<span class="ident">discard_if_not_mut</span>(); $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>)<span class="op">*</span> };
     (@<span class="ident">ordinal</span>) <span class="op">=</span><span class="op">&gt;</span> {};
     (@<span class="ident">year</span>) <span class="op">=</span><span class="op">&gt;</span> {};
 
     <span class="comment">// Cascade an out-of-bounds value from &quot;from&quot; to &quot;to&quot;.</span>
     ($(<span class="op">!</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">from_not_mut</span>:<span class="ident">ident</span>)<span class="question-mark">?</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span>:<span class="ident">ident</span> <span class="kw">in</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span>:<span class="ident">literal</span>.. <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span>:<span class="ident">literal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span>:<span class="ident">tt</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_comparisons</span>)]</span>
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_comparisons</span>, <span class="ident">unused_assignments</span>)]</span>
         <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">&gt;</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span> {
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">from_not_mut</span>)<span class="question-mark">?</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">-</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span>);
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_underscore</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>);
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">-</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span>;
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         } <span class="kw">else</span> <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">&lt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span> {
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">from_not_mut</span>)<span class="question-mark">?</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">+</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span>);
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_underscore</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>);
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">from</span> <span class="op">+</span><span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">max</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">min</span>;
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">to</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
         }
     };
 
     <span class="comment">// Special case the ordinal-to-year cascade, as it has different behavior.</span>
-    ($(<span class="op">!</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal_not_mut</span>:<span class="ident">ident</span>)<span class="question-mark">?</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span>:<span class="ident">ident</span> <span class="op">=</span><span class="op">&gt;</span> $(<span class="op">!</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">year_not_mut</span>:<span class="ident">ident</span>)<span class="question-mark">?</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span>:<span class="ident">ident</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="comment">// We need to actually capture the idents. Without this, macro hygiene causes errors.</span>
         <span class="macro">cascade!</span>(@<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span>);
         <span class="macro">cascade!</span>(@<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>);
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_assignments</span>)]</span>
         <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">&gt;</span> <span class="kw">crate</span><span class="ident">::util::days_in_year</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>) {
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year_not_mut</span>)<span class="question-mark">?</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>);
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal_not_mut</span>)<span class="question-mark">?</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">=</span> <span class="number">1</span>);
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">=</span> <span class="number">1</span>;
         } <span class="kw">else</span> <span class="kw">if</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year_not_mut</span>)<span class="question-mark">?</span>); <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>);
-            <span class="macro">cascade!</span>(@<span class="ident">discard_if_not_mut</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal_not_mut</span>)<span class="question-mark">?</span>);
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::util::days_in_year</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>)
-            );
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ordinal</span> <span class="op">=</span> <span class="kw">crate</span><span class="ident">::util::days_in_year</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">year</span>);
         }
     };
 }
