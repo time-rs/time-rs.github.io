@@ -1049,12 +1049,6 @@
 <span id="1048">1048</span>
 <span id="1049">1049</span>
 <span id="1050">1050</span>
-<span id="1051">1051</span>
-<span id="1052">1052</span>
-<span id="1053">1053</span>
-<span id="1054">1054</span>
-<span id="1055">1055</span>
-<span id="1056">1056</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
@@ -1305,14 +1299,14 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Date</span> {
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minute</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">minute</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">minutes_past_hour</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hour</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">hour</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">whole_hours</span>();
         <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">year</span>, <span class="kw-2">mut</span> <span class="ident">ordinal</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">date</span>.<span class="ident">to_ordinal_date</span>();
 
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
+        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
+        <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
+        <span class="macro">cascade!</span>(<span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
         <span class="macro">cascade!</span>(<span class="ident">ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">year</span>);
 
         <span class="ident">Date::__from_ordinal_date_unchecked</span>(<span class="ident">year</span>, <span class="ident">ordinal</span>)
@@ -1337,10 +1331,9 @@
 
         <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
         <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
-        <span class="macro">cascade!</span>(<span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">_</span>);
 
         <span class="ident">Time::__from_hms_nanos_unchecked</span>(
-            <span class="ident">hour</span> <span class="kw">as</span> <span class="kw">_</span>,
+            <span class="macro">rem_euclid!</span>(<span class="ident">hour</span>, <span class="number">24</span>) <span class="kw">as</span> <span class="kw">_</span>,
             <span class="ident">minute</span> <span class="kw">as</span> <span class="kw">_</span>,
             <span class="ident">second</span> <span class="kw">as</span> <span class="kw">_</span>,
             <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">nanosecond</span>(),
@@ -1362,15 +1355,15 @@
     <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00 UTC&quot;).year(), 2020);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">year</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minute</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">minute</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">minutes_past_hour</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hour</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">hour</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">whole_hours</span>();
         <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">year</span>, <span class="kw-2">mut</span> <span class="ident">ordinal</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">date</span>.<span class="ident">to_ordinal_date</span>();
 
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">year</span>);
+        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
+        <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
+        <span class="macro">cascade!</span>(<span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
+        <span class="macro">cascade!</span>(<span class="ident">ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">year</span>);
 
         <span class="ident">year</span>
     }
@@ -1426,15 +1419,15 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">ordinal</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minute</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">minute</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">minutes_past_hour</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hour</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">hour</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">whole_hours</span>();
-        <span class="kw">let</span> (<span class="ident">year</span>, <span class="kw-2">mut</span> <span class="ident">ordinal</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">date</span>.<span class="ident">to_ordinal_date</span>();
+        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">year</span>, <span class="kw-2">mut</span> <span class="ident">ordinal</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">date</span>.<span class="ident">to_ordinal_date</span>();
 
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
-        <span class="macro">cascade!</span>(<span class="ident">ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="op">!</span><span class="kw-2">mut</span> <span class="ident">year</span>);
+        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
+        <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
+        <span class="macro">cascade!</span>(<span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ordinal</span>);
+        <span class="macro">cascade!</span>(<span class="ident">ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">year</span>);
 
         <span class="ident">ordinal</span>
     }
@@ -1646,15 +1639,13 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">hour</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minute</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">minute</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">minutes_past_hour</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hour</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">hour</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">whole_hours</span>();
 
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
-        <span class="macro">cascade!</span>(<span class="ident">hour</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">24</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">_</span>);
-
-        <span class="ident">hour</span> <span class="kw">as</span> <span class="kw">_</span>
+        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
+        <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">hour</span>);
+        <span class="macro">rem_euclid!</span>(<span class="ident">hour</span>, <span class="number">24</span>) <span class="kw">as</span> <span class="kw">_</span>
     }
 
     <span class="doccomment">/// Get the minute within the hour in the stored offset.</span>
@@ -1672,13 +1663,11 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">minute</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
-        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">minute</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">minute</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">minutes_past_hour</span>();
 
-        <span class="macro">cascade!</span>(<span class="op">!</span><span class="kw-2">mut</span> <span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
-        <span class="macro">cascade!</span>(<span class="ident">minute</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">_</span>);
-
-        <span class="ident">minute</span> <span class="kw">as</span> <span class="kw">_</span>
+        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">minute</span>);
+        <span class="macro">rem_euclid!</span>(<span class="ident">minute</span>, <span class="number">60</span>) <span class="kw">as</span> <span class="kw">_</span>
     }
 
     <span class="doccomment">/// Get the second within the minute in the stored offset.</span>
@@ -1696,9 +1685,8 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">second</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
-        <span class="macro">cascade!</span>(<span class="ident">second</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">60</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">_</span>);
-        <span class="ident">second</span> <span class="kw">as</span> <span class="kw">_</span>
+        <span class="kw">let</span> <span class="ident">second</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">utc_datetime</span>.<span class="ident">second</span>() <span class="kw">as</span> <span class="ident">i8</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">offset</span>.<span class="ident">seconds_past_minute</span>();
+        <span class="macro">rem_euclid!</span>(<span class="ident">second</span>, <span class="number">60</span>) <span class="kw">as</span> <span class="kw">_</span>
     }
 
     <span class="comment">// Because a `UtcOffset` is limited in resolution to one second, any subsecond value will not</span>

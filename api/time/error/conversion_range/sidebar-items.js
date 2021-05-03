@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["ConversionRange","An error type indicating that a conversion failed because the target type could not store the initial value."]]});

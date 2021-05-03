@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["sealed","Seal the trait to prevent downstream users from implementing it, while still allowing it to exist in generic bounds."]],"trait":[["Parsable","A type that can be parsed."]]});

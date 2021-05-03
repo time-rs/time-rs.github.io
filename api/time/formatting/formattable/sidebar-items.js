@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["sealed","Seal the trait to prevent downstream users from implementing it."]],"trait":[["Formattable","A type that can be formatted."]]});

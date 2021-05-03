@@ -1,1 +1,0 @@
-initSidebarItems({"trait":[["Sealed","Parse the item using a format description and an input."]]});
