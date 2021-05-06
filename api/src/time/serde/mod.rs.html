@@ -405,6 +405,8 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-human-readable&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">serde::ser::Error</span> <span class="kw">as</span> <span class="kw">_</span>;
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
+<span class="kw">use</span> <span class="ident">standback::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::ComponentRange</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-human-readable&quot;</span>)]</span>
@@ -484,11 +486,9 @@
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-human-readable&quot;</span>)]</span>
         <span class="kw">if</span> <span class="ident">deserializer</span>.<span class="ident">is_human_readable</span>() {
             <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span><span class="ident">::deserialize</span>(<span class="ident">deserializer</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">dot</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">find</span>(<span class="string">&#39;.&#39;</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+            <span class="kw">let</span> (<span class="ident">seconds</span>, <span class="ident">nanoseconds</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">split_once</span>(<span class="string">&#39;.&#39;</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
                 <span class="ident">serde::de::Error::invalid_value</span>(<span class="ident">serde::de::Unexpected::Str</span>(<span class="ident">s</span>), <span class="kw-2">&amp;</span><span class="string">&quot;a decimal point&quot;</span>)
             })<span class="question-mark">?</span>;
-            <span class="kw">let</span> (<span class="ident">seconds</span>, <span class="ident">nanoseconds</span>) <span class="op">=</span> <span class="ident">s</span>.<span class="ident">split_at</span>(<span class="ident">dot</span>); <span class="comment">// TODO use case for str_split_once</span>
-            <span class="kw">let</span> <span class="ident">nanoseconds</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">nanoseconds</span>[<span class="number">1</span>..]; <span class="comment">// strip the leading dot</span>
 
             <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="ident">seconds</span>.<span class="ident">parse</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
                 <span class="ident">serde::de::Error::invalid_value</span>(<span class="ident">serde::de::Unexpected::Str</span>(<span class="ident">seconds</span>), <span class="kw-2">&amp;</span><span class="string">&quot;a number&quot;</span>)
