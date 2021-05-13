@@ -345,6 +345,39 @@ if the year should only be four and the week number the remaining two.</p>
 <h1 id="parsing"><a class="header" href="#parsing">Parsing</a></h1>
 <h1 id="macros"><a class="header" href="#macros">Macros</a></h1>
 <h1 id="extension-traits"><a class="header" href="#extension-traits">Extension traits</a></h1>
+<p>The time crate contains two extension traits: <code>time::ext::NumericalDuration</code> and
+<code>time::ext::NumericalStdDuration</code>. These traits exist to make writing code involving durations (both
+from the time crate and the standard library) cleaner to read. Rather than writing
+<code>Duration::seconds(5)</code>, it is possible to write <code>5.seconds()</code>. It is possible to use floating point
+literals such that <code>1.5.weeks()</code> is equivalent to <code>3.days() + 12.hours()</code>.</p>
+<p><code>NumericalDuration</code> provides the following methods that return a <code>time::Duration</code>:</p>
+<ul>
+<li><code>.nanoseconds()</code></li>
+<li><code>.microseconds()</code></li>
+<li><code>.milliseconds()</code></li>
+<li><code>.seconds()</code></li>
+<li><code>.minutes()</code></li>
+<li><code>.hours()</code></li>
+<li><code>.days()</code></li>
+<li><code>.weeks()</code></li>
+</ul>
+<p><code>NumericalStdDuration</code> provides the following methods that return a <code>core::time::Duration</code>:</p>
+<ul>
+<li><code>.std_nanoseconds()</code></li>
+<li><code>.std_microseconds()</code></li>
+<li><code>.std_milliseconds()</code></li>
+<li><code>.std_seconds()</code></li>
+<li><code>.std_minutes()</code></li>
+<li><code>.std_hours()</code></li>
+<li><code>.std_days()</code></li>
+<li><code>.std_weeks()</code></li>
+</ul>
+<p>The <code>NumericalDuration</code> trait is implemented for <code>i64</code> and <code>f64</code>, such that both integer and float
+literals are able to use the methods. The <code>NumericalStdDuration</code> trait is implemented for <code>u64</code> and
+<code>f64</code> for the same reasons, though the latter will perform a runtime check ensuring the value is
+non-negative.</p>
+<p>While it is possible to use these extension methods on non-literals, such usage is discouraged for
+ease of reading.</p>
 <h1 id="utility-functions"><a class="header" href="#utility-functions">Utility functions</a></h1>
 <h1 id="interop-with-stdlib"><a class="header" href="#interop-with-stdlib">Interop with stdlib</a></h1>
 <h1 id="feature-flags"><a class="header" href="#feature-flags">Feature flags</a></h1>
