@@ -1049,6 +1049,10 @@
 <span id="1048">1048</span>
 <span id="1049">1049</span>
 <span id="1050">1050</span>
+<span id="1051">1051</span>
+<span id="1052">1052</span>
+<span id="1053">1053</span>
+<span id="1054">1054</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
@@ -1936,7 +1940,9 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
     <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-        <span class="self">self</span>.<span class="ident">replace_date_time</span>(<span class="self">self</span>.<span class="ident">utc_datetime</span> <span class="op">+</span> <span class="ident">rhs</span>)
+        (<span class="self">self</span>.<span class="ident">utc_datetime</span> <span class="op">+</span> <span class="ident">rhs</span>)
+            .<span class="ident">assume_utc</span>()
+            .<span class="ident">to_offset</span>(<span class="self">self</span>.<span class="ident">offset</span>)
     }
 }
 
@@ -1956,7 +1962,9 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
 
     <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Output</span> {
-        <span class="self">self</span>.<span class="ident">replace_date_time</span>(<span class="self">self</span>.<span class="ident">utc_datetime</span> <span class="op">-</span> <span class="ident">rhs</span>)
+        (<span class="self">self</span>.<span class="ident">utc_datetime</span> <span class="op">-</span> <span class="ident">rhs</span>)
+            .<span class="ident">assume_utc</span>()
+            .<span class="ident">to_offset</span>(<span class="self">self</span>.<span class="ident">offset</span>)
     }
 }
 
