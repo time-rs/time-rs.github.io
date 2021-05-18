@@ -567,6 +567,9 @@
 <span id="566">566</span>
 <span id="567">567</span>
 <span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
 </pre><pre class="rust">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(
     <span class="ident">any</span>(
@@ -1043,7 +1046,10 @@
         <span class="attribute">#[<span class="ident">link</span>(<span class="ident">name</span> <span class="op">=</span> <span class="string">&quot;Kernel32&quot;</span>)]</span>
         <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> {
             <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/timezoneapi/nf-timezoneapi-systemtimetofiletime</span>
-            <span class="kw">fn</span> <span class="ident">SystemTimeToFileTime</span>(<span class="ident">lpSystemTime</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">SystemTime</span>, <span class="ident">lpFileTime</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FileTime</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span>;
+            <span class="kw">fn</span> <span class="ident">SystemTimeToFileTime</span>(
+                <span class="ident">lpSystemTime</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">SystemTime</span>,
+                <span class="ident">lpFileTime</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">FileTime</span>,
+            ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span>;
 
             <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/timezoneapi/nf-timezoneapi-systemtimetotzspecificlocaltime</span>
             <span class="kw">fn</span> <span class="ident">SystemTimeToTzSpecificLocalTime</span>(
