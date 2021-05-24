@@ -72,8 +72,17 @@
 <span id="71">71</span>
 <span id="72">72</span>
 <span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Utility functions.</span>
+
+<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::Month</span>;
 
 <span class="doccomment">/// Whether to adjust the date, and in which direction. Useful when implementing arithmetic.</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">enum</span> <span class="ident">DateAdjustment</span> {
@@ -85,15 +94,20 @@
     <span class="prelude-val">None</span>,
 }
 
-<span class="doccomment">/// The number of days in a month in both common and leap years.</span>
-<span class="kw">const</span> <span class="ident">DAYS_IN_MONTH_COMMON_LEAP</span>: [[<span class="ident">u8</span>; <span class="number">12</span>]; <span class="number">2</span>] <span class="op">=</span> [
-    [<span class="number">31</span>, <span class="number">28</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>],
-    [<span class="number">31</span>, <span class="number">29</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>, <span class="number">30</span>, <span class="number">31</span>],
-];
-
 <span class="doccomment">/// Get the number of days in the month of a given year.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">days_in_year_month</span>(<span class="ident">year</span>: <span class="ident">i32</span>, <span class="ident">month</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
-    <span class="ident">DAYS_IN_MONTH_COMMON_LEAP</span>[<span class="ident">is_leap_year</span>(<span class="ident">year</span>) <span class="kw">as</span> <span class="ident">usize</span>][<span class="ident">month</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">-</span> <span class="number">1</span>]
+<span class="doccomment">///</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use time::{Month, util};</span>
+<span class="doccomment">/// assert!(util::days_in_year_month(2020, Month::February), 29);</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">days_in_year_month</span>(<span class="ident">year</span>: <span class="ident">i32</span>, <span class="ident">month</span>: <span class="ident">Month</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
+    <span class="kw">match</span> <span class="ident">month</span> {
+        <span class="ident">January</span> <span class="op">|</span> <span class="ident">March</span> <span class="op">|</span> <span class="ident">May</span> <span class="op">|</span> <span class="ident">July</span> <span class="op">|</span> <span class="ident">August</span> <span class="op">|</span> <span class="ident">October</span> <span class="op">|</span> <span class="ident">December</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">31</span>,
+        <span class="ident">April</span> <span class="op">|</span> <span class="ident">June</span> <span class="op">|</span> <span class="ident">September</span> <span class="op">|</span> <span class="ident">November</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">30</span>,
+        <span class="ident">February</span> <span class="kw">if</span> <span class="ident">is_leap_year</span>(<span class="ident">year</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">29</span>,
+        <span class="ident">February</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">28</span>,
+    }
 }
 
 <span class="doccomment">/// Returns if the provided year is a leap year in the proleptic Gregorian calendar. Uses</span>

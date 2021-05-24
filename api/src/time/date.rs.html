@@ -786,6 +786,8 @@
 <span id="785">785</span>
 <span id="786">786</span>
 <span id="787">787</span>
+<span id="788">788</span>
+<span id="789">789</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>};
@@ -800,7 +802,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parsing::Parsable</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::util</span>::{<span class="ident">days_in_year</span>, <span class="ident">days_in_year_month</span>, <span class="ident">is_leap_year</span>, <span class="ident">weeks_in_year</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Duration</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">Weekday</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Duration</span>, <span class="ident">Month</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">Weekday</span>};
 
 <span class="doccomment">/// The minimum valid year.</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;large-dates&quot;</span>)]</span>
@@ -864,18 +866,18 @@
     <span class="doccomment">/// Attempt to create a `Date` from the year, month, and day.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::Date;</span>
-    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, 1, 1).is_ok());</span>
-    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, 12, 31).is_ok());</span>
+    <span class="doccomment">/// # use time::{Date, Month};</span>
+    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, Month::January, 1).is_ok());</span>
+    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, Month::December, 31).is_ok());</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::Date;</span>
-    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, 2, 29).is_err()); // 2019 isn&#39;t a leap year.</span>
+    <span class="doccomment">/// # use time::{Date, Month};</span>
+    <span class="doccomment">/// assert!(Date::from_calendar_date(2019, Month::February, 29).is_err()); // 2019 isn&#39;t a leap year.</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_calendar_date</span>(
         <span class="ident">year</span>: <span class="ident">i32</span>,
-        <span class="ident">month</span>: <span class="ident">u8</span>,
+        <span class="ident">month</span>: <span class="ident">Month</span>,
         <span class="ident">day</span>: <span class="ident">u8</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">error::ComponentRange</span><span class="op">&gt;</span> {
         <span class="doccomment">/// Cumulative days through the beginning of a month in both common and leap years.</span>
@@ -885,7 +887,6 @@
         ];
 
         <span class="macro">ensure_value_in_range!</span>(<span class="ident">year</span> <span class="kw">in</span> <span class="ident">MIN_YEAR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">MAX_YEAR</span>);
-        <span class="macro">ensure_value_in_range!</span>(<span class="ident">month</span> <span class="kw">in</span> <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">12</span>);
         <span class="macro">ensure_value_in_range!</span>(<span class="ident">day</span> <span class="ident">conditionally</span> <span class="kw">in</span> <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">days_in_year_month</span>(<span class="ident">year</span>, <span class="ident">month</span>));
 
         <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::__from_ordinal_date_unchecked</span>(
@@ -1038,11 +1039,11 @@
     <span class="doccomment">/// The returned value will always be in the range `1..=12`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::macros::date;</span>
-    <span class="doccomment">/// assert_eq!(date!(&quot;2019-01-01&quot;).month(), 1);</span>
-    <span class="doccomment">/// assert_eq!(date!(&quot;2019-12-31&quot;).month(), 12);</span>
+    <span class="doccomment">/// # use time::{macros::date, Month};</span>
+    <span class="doccomment">/// assert_eq!(date!(&quot;2019-01-01&quot;).month(), Month::January);</span>
+    <span class="doccomment">/// assert_eq!(date!(&quot;2019-12-31&quot;).month(), Month::December);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Month</span> {
         <span class="self">self</span>.<span class="ident">month_day</span>().<span class="number">0</span>
     }
 
@@ -1062,7 +1063,7 @@
     <span class="doccomment">/// Get the month and day. This is more efficient than fetching the components individually.</span>
     <span class="comment">// For whatever reason, rustc has difficulty optimizing this function. It&#39;s significantly faster</span>
     <span class="comment">// to write the statements out by hand.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month_day</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u8</span>, <span class="ident">u8</span>) {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month_day</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Month</span>, <span class="ident">u8</span>) {
         <span class="doccomment">/// The number of days up to and including the given month. Common years</span>
         <span class="doccomment">/// are first, followed by leap years.</span>
         <span class="kw">const</span> <span class="ident">CUMULATIVE_DAYS_IN_MONTH_COMMON_LEAP</span>: [[<span class="ident">u16</span>; <span class="number">11</span>]; <span class="number">2</span>] <span class="op">=</span> [
@@ -1074,29 +1075,29 @@
         <span class="kw">let</span> <span class="ident">ordinal</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ordinal</span>();
 
         <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">10</span>] {
-            (<span class="number">12</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">10</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::December</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">10</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">9</span>] {
-            (<span class="number">11</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">9</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::November</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">9</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">8</span>] {
-            (<span class="number">10</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">8</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::October</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">8</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">7</span>] {
-            (<span class="number">9</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">7</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::September</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">7</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">6</span>] {
-            (<span class="number">8</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">6</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::August</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">6</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">5</span>] {
-            (<span class="number">7</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">5</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::July</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">5</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">4</span>] {
-            (<span class="number">6</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">4</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::June</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">4</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">3</span>] {
-            (<span class="number">5</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">3</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::May</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">3</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">2</span>] {
-            (<span class="number">4</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">2</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::April</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">2</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">1</span>] {
-            (<span class="number">3</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">1</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::March</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">1</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">ordinal</span> <span class="op">&gt;</span> <span class="ident">days</span>[<span class="number">0</span>] {
-            (<span class="number">2</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">0</span>]) <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::February</span>, (<span class="ident">ordinal</span> <span class="op">-</span> <span class="ident">days</span>[<span class="number">0</span>]) <span class="kw">as</span> <span class="kw">_</span>)
         } <span class="kw">else</span> {
-            (<span class="number">1</span>, <span class="ident">ordinal</span> <span class="kw">as</span> <span class="kw">_</span>)
+            (<span class="ident">Month::January</span>, <span class="ident">ordinal</span> <span class="kw">as</span> <span class="kw">_</span>)
         }
     }
 
@@ -1173,10 +1174,13 @@
     <span class="doccomment">/// Get the year, month, and day.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::macros::date;</span>
-    <span class="doccomment">/// assert_eq!(date!(&quot;2019-01-01&quot;).to_calendar_date(), (2019, 1, 1));</span>
+    <span class="doccomment">/// # use time::{macros::date, Month};</span>
+    <span class="doccomment">/// assert_eq!(</span>
+    <span class="doccomment">///     date!(&quot;2019-01-01&quot;).to_calendar_date(),</span>
+    <span class="doccomment">///     (2019, Month::January, 1)</span>
+    <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_calendar_date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">i32</span>, <span class="ident">u8</span>, <span class="ident">u8</span>) {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_calendar_date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">i32</span>, <span class="ident">Month</span>, <span class="ident">u8</span>) {
         <span class="kw">let</span> (<span class="ident">month</span>, <span class="ident">day</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">month_day</span>();
         (<span class="self">self</span>.<span class="ident">year</span>(), <span class="ident">month</span>, <span class="ident">day</span>)
     }
