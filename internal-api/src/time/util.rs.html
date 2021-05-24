@@ -98,7 +98,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// # use time::{Month, util};</span>
-<span class="doccomment">/// assert!(util::days_in_year_month(2020, Month::February), 29);</span>
+<span class="doccomment">/// assert_eq!(util::days_in_year_month(2020, Month::February), 29);</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">days_in_year_month</span>(<span class="ident">year</span>: <span class="ident">i32</span>, <span class="ident">month</span>: <span class="ident">Month</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
     <span class="kw">use</span> <span class="ident">Month</span>::<span class="kw-2">*</span>;
