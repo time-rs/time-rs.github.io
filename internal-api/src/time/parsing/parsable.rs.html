@@ -297,6 +297,12 @@
 <span id="296">296</span>
 <span id="297">297</span>
 <span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
 </pre><pre class="rust">
 <span class="doccomment">//! A trait that can be used to parse an item from an input.</span>
 
@@ -310,7 +316,7 @@
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description::well_known::Rfc3339</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description::FormatItem</span>;
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parsing</span>::{<span class="ident">Parsed</span>, <span class="ident">ParsedItem</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">Month</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>};
 
 <span class="doccomment">/// A type that can be parsed.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Parsable</span>: <span class="ident">sealed::Sealed</span> {}
@@ -448,6 +454,8 @@
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">dash</span>(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidLiteral</span>)<span class="question-mark">?</span>.<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">exactly_n_digits</span>(<span class="number">2</span>)(<span class="ident">input</span>)
             .<span class="ident">ok_or</span>(<span class="ident">InvalidComponent</span>(<span class="string">&quot;month&quot;</span>))<span class="question-mark">?</span>
+            .<span class="ident">flat_map_res</span>(<span class="ident">Month::from_number</span>)
+            .<span class="ident">map_err</span>(<span class="ident">error::TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
             .<span class="ident">assign_value_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">parsed</span>.<span class="ident">month</span>);
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">dash</span>(<span class="ident">input</span>).<span class="ident">ok_or</span>(<span class="ident">InvalidLiteral</span>)<span class="question-mark">?</span>.<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">exactly_n_digits</span>(<span class="number">2</span>)(<span class="ident">input</span>)
@@ -588,11 +596,15 @@
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">error::Parse::UnexpectedTrailingCharacters</span>);
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident">Date::from_calendar_date</span>(<span class="ident">year</span> <span class="kw">as</span> <span class="kw">_</span>, <span class="ident">month</span>, <span class="ident">day</span>)
-            .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
-            .<span class="ident">with_hms_nano</span>(<span class="ident">hour</span>, <span class="ident">minute</span>, <span class="ident">second</span>, <span class="ident">nanosecond</span>)
-            .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
-            .<span class="ident">assume_offset</span>(<span class="ident">offset</span>))
+        <span class="prelude-val">Ok</span>(<span class="ident">Date::from_calendar_date</span>(
+            <span class="ident">year</span> <span class="kw">as</span> <span class="kw">_</span>,
+            <span class="kw">crate</span><span class="ident">::Month::from_number</span>(<span class="ident">month</span>).<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>,
+            <span class="ident">day</span>,
+        )
+        .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
+        .<span class="ident">with_hms_nano</span>(<span class="ident">hour</span>, <span class="ident">minute</span>, <span class="ident">second</span>, <span class="ident">nanosecond</span>)
+        .<span class="ident">map_err</span>(<span class="ident">TryFromParsed::ComponentRange</span>)<span class="question-mark">?</span>
+        .<span class="ident">assume_offset</span>(<span class="ident">offset</span>))
     }
 }
 <span class="comment">// endregion well-known formats</span>

@@ -674,7 +674,7 @@
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::formatting::Formattable</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parsing::Parsable</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">util</span>, <span class="ident">Date</span>, <span class="ident">Duration</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>, <span class="ident">Weekday</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">util</span>, <span class="ident">Date</span>, <span class="ident">Duration</span>, <span class="ident">Month</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>, <span class="ident">Weekday</span>};
 
 <span class="doccomment">/// Combined date and time.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>)]</span>
@@ -738,11 +738,11 @@
     <span class="doccomment">/// The returned value will always be in the range `1..=12`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).month(), 1);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).month(), 12);</span>
+    <span class="doccomment">/// # use time::{macros::datetime, Month};</span>
+    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).month(), Month::January);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).month(), Month::December);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Month</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">month</span>()
     }
 
@@ -821,13 +821,13 @@
     <span class="doccomment">/// Get the year, month, and day.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use time::macros::datetime;</span>
+    <span class="doccomment">/// # use time::{macros::datetime, Month};</span>
     <span class="doccomment">/// assert_eq!(</span>
     <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;).to_calendar_date(),</span>
-    <span class="doccomment">///     (2019, 1, 1)</span>
+    <span class="doccomment">///     (2019, Month::January, 1)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_calendar_date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">i32</span>, <span class="ident">u8</span>, <span class="ident">u8</span>) {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_calendar_date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">i32</span>, <span class="ident">Month</span>, <span class="ident">u8</span>) {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">to_calendar_date</span>()
     }
 

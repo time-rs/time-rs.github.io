@@ -321,6 +321,8 @@
 <span id="320">320</span>
 <span id="321">321</span>
 <span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
 </pre><pre class="rust">
 <span class="doccomment">//! # Feature flags</span>
 <span class="doccomment">//!</span>
@@ -604,6 +606,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;macros&quot;</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;macros&quot;</span>)))]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">macros</span>;
+<span class="kw">mod</span> <span class="ident">month</span>;
 <span class="doccomment">/// The [`OffsetDateTime`] struct and its associated `impl`s.</span>
 <span class="kw">mod</span> <span class="ident">offset_date_time</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)]</span>
@@ -636,6 +639,7 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error::Error</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::instant::Instant</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::month::Month</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::offset_date_time::OffsetDateTime</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::primitive_date_time::PrimitiveDateTime</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::time::Time</span>;

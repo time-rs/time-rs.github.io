@@ -108,6 +108,9 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
 </pre><pre class="rust">
 <span class="doccomment">/// Construct a [`Date`](crate::Date) with a statically known value.</span>
 <span class="doccomment">///</span>
@@ -116,13 +119,16 @@
 <span class="doccomment">/// Three formats are supported: year-week-weekday, year-ordinal, and year-month-day.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use time::{Date, Weekday::*, macros::date};</span>
+<span class="doccomment">/// # use time::{Date, Weekday::*, Month, macros::date};</span>
 <span class="doccomment">/// assert_eq!(</span>
 <span class="doccomment">///     date!(&quot;2020-W01-3&quot;),</span>
 <span class="doccomment">///     Date::from_iso_week_date(2020, 1, Wednesday)?</span>
 <span class="doccomment">/// );</span>
 <span class="doccomment">/// assert_eq!(date!(&quot;2020-001&quot;), Date::from_ordinal_date(2020, 1)?);</span>
-<span class="doccomment">/// assert_eq!(date!(&quot;2020-01-01&quot;), Date::from_calendar_date(2020, 1, 1)?);</span>
+<span class="doccomment">/// assert_eq!(</span>
+<span class="doccomment">///     date!(&quot;2020-01-01&quot;),</span>
+<span class="doccomment">///     Date::from_calendar_date(2020, Month::January, 1)?</span>
+<span class="doccomment">/// );</span>
 <span class="doccomment">/// # Ok::&lt;_, time::Error&gt;(())</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">time_macros::date</span>;

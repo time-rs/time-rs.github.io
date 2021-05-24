@@ -564,21 +564,7 @@
 <span id="563">563</span>
 <span id="564">564</span>
 <span id="565">565</span>
-<span id="566">566</span>
-<span id="567">567</span>
-<span id="568">568</span>
-<span id="569">569</span>
-<span id="570">570</span>
-<span id="571">571</span>
 </pre><pre class="rust">
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(
-    <span class="ident">any</span>(
-        <span class="ident">all</span>(<span class="ident">target_family</span> <span class="op">=</span> <span class="string">&quot;unix&quot;</span>, <span class="ident">unsound_local_offset</span>),
-        <span class="ident">target_family</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>
-    ),
-    <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;local-offset&quot;</span>
-))]</span>
-<span class="kw">use</span> <span class="ident">core::convert::TryInto</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::ops::Neg</span>;
@@ -927,6 +913,7 @@
     <span class="comment">// can only be enabled by the end user. It must be explicitly passed on each compilation.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">all</span>(<span class="ident">target_family</span> <span class="op">=</span> <span class="string">&quot;unix&quot;</span>, <span class="ident">unsound_local_offset</span>))]</span>
     {
+        <span class="kw">use</span> <span class="ident">core::convert::TryInto</span>;
         <span class="kw">use</span> <span class="ident">core::mem::MaybeUninit</span>;
 
         <span class="doccomment">/// Convert the given Unix timestamp to a `libc::tm`. Returns `None` on any error.</span>
@@ -1019,6 +1006,7 @@
     }
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">target_family</span> <span class="op">=</span> <span class="string">&quot;windows&quot;</span>)]</span>
     {
+        <span class="kw">use</span> <span class="ident">core::convert::TryInto</span>;
         <span class="kw">use</span> <span class="ident">core::mem::MaybeUninit</span>;
 
         <span class="comment">// ffi: WINAPI FILETIME struct</span>

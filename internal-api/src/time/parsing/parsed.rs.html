@@ -288,7 +288,7 @@
     <span class="ident">parse_week_number</span>, <span class="ident">parse_weekday</span>, <span class="ident">parse_year</span>, <span class="ident">Period</span>,
 };
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::parsing::ParsedItem</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>, <span class="ident">Weekday</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">error</span>, <span class="ident">Date</span>, <span class="ident">Month</span>, <span class="ident">OffsetDateTime</span>, <span class="ident">PrimitiveDateTime</span>, <span class="ident">Time</span>, <span class="ident">UtcOffset</span>, <span class="ident">Weekday</span>};
 
 <span class="doccomment">/// All information parsed.</span>
 <span class="doccomment">///</span>
@@ -308,7 +308,7 @@
     <span class="doccomment">/// The last two digits of the ISO week year.</span>
     <span class="kw">pub</span> <span class="ident">iso_year_last_two</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Month of the year.</span>
-    <span class="kw">pub</span> <span class="ident">month</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">NonZeroU8</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">month</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Month</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Week of the year, where week one begins on the first Sunday of the calendar year.</span>
     <span class="kw">pub</span> <span class="ident">sunday_week_number</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
     <span class="doccomment">/// Week of the year, where week one begins on the first Monday of the calendar year.</span>
@@ -480,7 +480,7 @@
 
         <span class="kw">match</span> <span class="ident">parsed</span> {
             <span class="macro">items!</span>(<span class="ident">year</span>, <span class="ident">ordinal</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::from_ordinal_date</span>(<span class="ident">year</span>, <span class="ident">ordinal</span>.<span class="ident">get</span>())<span class="question-mark">?</span>),
-            <span class="macro">items!</span>(<span class="ident">year</span>, <span class="ident">month</span>, <span class="ident">day</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::from_calendar_date</span>(<span class="ident">year</span>, <span class="ident">month</span>.<span class="ident">get</span>(), <span class="ident">day</span>.<span class="ident">get</span>())<span class="question-mark">?</span>),
+            <span class="macro">items!</span>(<span class="ident">year</span>, <span class="ident">month</span>, <span class="ident">day</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::from_calendar_date</span>(<span class="ident">year</span>, <span class="ident">month</span>, <span class="ident">day</span>.<span class="ident">get</span>())<span class="question-mark">?</span>),
             <span class="macro">items!</span>(<span class="ident">iso_year</span>, <span class="ident">iso_week_number</span>, <span class="ident">weekday</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="self">Self</span><span class="ident">::from_iso_week_date</span>(
                 <span class="ident">iso_year</span>,
                 <span class="ident">iso_week_number</span>.<span class="ident">get</span>(),
