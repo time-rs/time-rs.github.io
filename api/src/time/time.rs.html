@@ -589,19 +589,6 @@
 <span id="588">588</span>
 <span id="589">589</span>
 <span id="590">590</span>
-<span id="591">591</span>
-<span id="592">592</span>
-<span id="593">593</span>
-<span id="594">594</span>
-<span id="595">595</span>
-<span id="596">596</span>
-<span id="597">597</span>
-<span id="598">598</span>
-<span id="599">599</span>
-<span id="600">600</span>
-<span id="601">601</span>
-<span id="602">602</span>
-<span id="603">603</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::ops</span>::{<span class="ident">Add</span>, <span class="ident">AddAssign</span>, <span class="ident">Sub</span>, <span class="ident">SubAssign</span>};
@@ -609,8 +596,6 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">std::io</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description</span>::{<span class="ident">modifier</span>, <span class="ident">Component</span>, <span class="ident">FormatItem</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::formatting::Formattable</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)]</span>
@@ -1062,39 +1047,28 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)))]</span>
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Time</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
-        <span class="doccomment">/// [hour]:[minute]:[second].[subsecond]</span>
-        <span class="kw">const</span> <span class="ident">FORMAT</span>: <span class="kw-2">&amp;</span>[<span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Hour</span>(<span class="ident">modifier::Hour</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::None</span>,
-                <span class="ident">is_12_hour_clock</span>: <span class="bool-val">false</span>,
-            })),
-            <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;:&quot;</span>),
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Minute</span>(<span class="ident">modifier::Minute</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
-            })),
-            <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;:&quot;</span>),
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Second</span>(<span class="ident">modifier::Second</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
-            })),
-            <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;.&quot;</span>),
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Subsecond</span>(<span class="ident">modifier::Subsecond</span> {
-                <span class="ident">digits</span>: <span class="ident">modifier::SubsecondDigits::OneOrMore</span>,
-            })),
-        ];
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">format</span>(<span class="kw-2">&amp;</span><span class="ident">FORMAT</span>) {
-            <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="ident">s</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::InvalidComponent</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable!</span>(<span class="string">&quot;A well-known format is not used&quot;</span>)
-            }
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::InsufficientTypeInformation</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable!</span>(<span class="string">&quot;All components used only require a `Time`&quot;</span>)
-            }
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::StdIo</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">fmt::Error</span>),
-        }
+        <span class="kw">let</span> (<span class="ident">value</span>, <span class="ident">width</span>) <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">nanosecond</span>() {
+            <span class="ident">nanos</span> <span class="kw">if</span> <span class="ident">nanos</span> <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span>, <span class="number">9</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10</span>, <span class="number">8</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">100</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">100</span>, <span class="number">7</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">1_000</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">1_000</span>, <span class="number">6</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10_000</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10_000</span>, <span class="number">5</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">100_000</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">100_000</span>, <span class="number">4</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">1_000_000</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">1_000_000</span>, <span class="number">3</span>),
+            <span class="ident">nanos</span> <span class="kw">if</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10_000_000</span>) <span class="op">%</span> <span class="number">10</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">10_000_000</span>, <span class="number">2</span>),
+            <span class="ident">nanos</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">nanos</span> <span class="op">/</span> <span class="number">100_000_000</span>, <span class="number">1</span>),
+        };
+        <span class="macro">write!</span>(
+            <span class="ident">f</span>,
+            <span class="string">&quot;{}:{:02}:{:02}.{:0width$}&quot;</span>,
+            <span class="self">self</span>.<span class="ident">hour</span>,
+            <span class="self">self</span>.<span class="ident">minute</span>,
+            <span class="self">self</span>.<span class="ident">second</span>,
+            <span class="ident">value</span>,
+            <span class="ident">width</span> <span class="op">=</span> <span class="ident">width</span>
+        )
     }
 }
 <span class="comment">// endregion formatting &amp; parsing</span>
