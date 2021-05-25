@@ -542,38 +542,13 @@
 <span id="541">541</span>
 <span id="542">542</span>
 <span id="543">543</span>
-<span id="544">544</span>
-<span id="545">545</span>
-<span id="546">546</span>
-<span id="547">547</span>
-<span id="548">548</span>
-<span id="549">549</span>
-<span id="550">550</span>
-<span id="551">551</span>
-<span id="552">552</span>
-<span id="553">553</span>
-<span id="554">554</span>
-<span id="555">555</span>
-<span id="556">556</span>
-<span id="557">557</span>
-<span id="558">558</span>
-<span id="559">559</span>
-<span id="560">560</span>
-<span id="561">561</span>
-<span id="562">562</span>
-<span id="563">563</span>
-<span id="564">564</span>
-<span id="565">565</span>
 </pre><pre class="rust">
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">core::fmt</span>;
 <span class="kw">use</span> <span class="ident">core::ops::Neg</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">std::io</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::error</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
-<span class="kw">use</span> <span class="kw">crate</span><span class="ident">::format_description</span>::{<span class="ident">modifier</span>, <span class="ident">Component</span>, <span class="ident">FormatItem</span>};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span><span class="ident">::formatting::Formattable</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;parsing&quot;</span>)]</span>
@@ -856,35 +831,16 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">__time_03_docs</span>, <span class="ident">doc</span>(<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;formatting&quot;</span>)))]</span>
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">UtcOffset</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
-        <span class="doccomment">/// [offset_hour sign:mandatory]:[offset_minute]:[offset_second]</span>
-        <span class="kw">const</span> <span class="ident">FORMAT</span>: <span class="kw-2">&amp;</span>[<span class="ident">FormatItem</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>] <span class="op">=</span> <span class="kw-2">&amp;</span>[
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::OffsetHour</span>(<span class="ident">modifier::OffsetHour</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
-                <span class="ident">sign_is_mandatory</span>: <span class="bool-val">true</span>,
-            })),
-            <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;:&quot;</span>),
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::OffsetMinute</span>(<span class="ident">modifier::OffsetMinute</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
-            })),
-            <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;:&quot;</span>),
-            <span class="ident">FormatItem::Component</span>(<span class="ident">Component::OffsetSecond</span>(<span class="ident">modifier::OffsetSecond</span> {
-                <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
-            })),
-        ];
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">format</span>(<span class="kw-2">&amp;</span><span class="ident">FORMAT</span>) {
-            <span class="prelude-val">Ok</span>(<span class="kw-2">ref</span> <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="ident">s</span>),
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::InvalidComponent</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable!</span>(<span class="string">&quot;A well-known format is not used&quot;</span>)
-            }
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::InsufficientTypeInformation</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">unreachable!</span>(<span class="string">&quot;All components used only require a `UtcOffset`&quot;</span>)
-            }
-            <span class="prelude-val">Err</span>(<span class="ident">error::Format::StdIo</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">fmt::Error</span>),
-        }
+        <span class="macro">write!</span>(
+            <span class="ident">f</span>,
+            <span class="string">&quot;{}{:02}:{:02}:{:02}&quot;</span>,
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_negative</span>() { <span class="string">&#39;-&#39;</span> } <span class="kw">else</span> { <span class="string">&#39;+&#39;</span> },
+            <span class="self">self</span>.<span class="ident">hours</span>.<span class="ident">abs</span>(),
+            <span class="self">self</span>.<span class="ident">minutes</span>.<span class="ident">abs</span>(),
+            <span class="self">self</span>.<span class="ident">seconds</span>.<span class="ident">abs</span>()
+        )
     }
 }
 <span class="comment">// endregion formatting &amp; parsing</span>
