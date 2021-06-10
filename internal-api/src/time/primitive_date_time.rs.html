@@ -1,5 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/primitive_date_time.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitive_date_time.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/55999857"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../time/index.html'><div class='logo-container'><img src='https://avatars0.githubusercontent.com/u/55999857' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/primitive_date_time.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitive_date_time.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="shortcut icon" href="https://avatars0.githubusercontent.com/u/55999857"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../time/index.html'><div class='logo-container'><img src='https://avatars0.githubusercontent.com/u/55999857' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -687,8 +686,8 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::{PrimitiveDateTime, macros::{date, datetime, time}};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     PrimitiveDateTime::new(date!(&quot;2019-01-01&quot;), time!(&quot;0:00&quot;)),</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;),</span>
+    <span class="doccomment">///     PrimitiveDateTime::new(date!(2019-01-01), time!(0:00)),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00),</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">date</span>: <span class="ident">Date</span>, <span class="ident">time</span>: <span class="ident">Time</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
@@ -700,7 +699,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::{date, datetime};</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).date(), date!(&quot;2019-01-01&quot;));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).date(), date!(2019-01-01));</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Date</span> {
         <span class="self">self</span>.<span class="ident">date</span>
@@ -710,7 +709,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::{datetime, time};</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).time(), time!(&quot;0:00&quot;));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).time(), time!(0:00));</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">time</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Time</span> {
         <span class="self">self</span>.<span class="ident">time</span>
     }
@@ -721,9 +720,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).year(), 2019);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).year(), 2019);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00&quot;).year(), 2020);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).year(), 2019);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-31 0:00).year(), 2019);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00).year(), 2020);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">year</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">year</span>()
@@ -735,8 +734,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::{macros::datetime, Month};</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).month(), Month::January);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).month(), Month::December);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).month(), Month::January);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-31 0:00).month(), Month::December);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">month</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Month</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">month</span>()
@@ -748,8 +747,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).day(), 1);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).day(), 31);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).day(), 1);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-31 0:00).day(), 31);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">day</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">day</span>()
@@ -761,8 +760,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).ordinal(), 1);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).ordinal(), 365);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).ordinal(), 1);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-31 0:00).ordinal(), 365);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">ordinal</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">ordinal</span>()
@@ -774,11 +773,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).iso_week(), 1);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-10-04 0:00&quot;).iso_week(), 40);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00&quot;).iso_week(), 1);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-12-31 0:00&quot;).iso_week(), 53);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2021-01-01 0:00&quot;).iso_week(), 53);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).iso_week(), 1);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-10-04 0:00).iso_week(), 40);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00).iso_week(), 1);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-12-31 0:00).iso_week(), 53);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2021-01-01 0:00).iso_week(), 53);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">iso_week</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">iso_week</span>()
@@ -790,10 +789,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).sunday_based_week(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00&quot;).sunday_based_week(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-12-31 0:00&quot;).sunday_based_week(), 52);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2021-01-01 0:00&quot;).sunday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).sunday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00).sunday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-12-31 0:00).sunday_based_week(), 52);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2021-01-01 0:00).sunday_based_week(), 0);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">sunday_based_week</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">sunday_based_week</span>()
@@ -805,10 +804,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).monday_based_week(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00&quot;).monday_based_week(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-12-31 0:00&quot;).monday_based_week(), 52);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2021-01-01 0:00&quot;).monday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).monday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00).monday_based_week(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-12-31 0:00).monday_based_week(), 52);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2021-01-01 0:00).monday_based_week(), 0);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">monday_based_week</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">monday_based_week</span>()
@@ -819,7 +818,7 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::{macros::datetime, Month};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;).to_calendar_date(),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00).to_calendar_date(),</span>
     <span class="doccomment">///     (2019, Month::January, 1)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -831,7 +830,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).to_ordinal_date(), (2019, 1));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).to_ordinal_date(), (2019, 1));</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_ordinal_date</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">i32</span>, <span class="ident">u16</span>) {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">to_ordinal_date</span>()
@@ -842,23 +841,23 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::{Weekday::*, macros::datetime};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;).to_iso_week_date(),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00).to_iso_week_date(),</span>
     <span class="doccomment">///     (2019, 1, Tuesday)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-10-04 0:00&quot;).to_iso_week_date(),</span>
+    <span class="doccomment">///     datetime!(2019-10-04 0:00).to_iso_week_date(),</span>
     <span class="doccomment">///     (2019, 40, Friday)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 0:00&quot;).to_iso_week_date(),</span>
+    <span class="doccomment">///     datetime!(2020-01-01 0:00).to_iso_week_date(),</span>
     <span class="doccomment">///     (2020, 1, Wednesday)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-12-31 0:00&quot;).to_iso_week_date(),</span>
+    <span class="doccomment">///     datetime!(2020-12-31 0:00).to_iso_week_date(),</span>
     <span class="doccomment">///     (2020, 53, Thursday)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2021-01-01 0:00&quot;).to_iso_week_date(),</span>
+    <span class="doccomment">///     datetime!(2021-01-01 0:00).to_iso_week_date(),</span>
     <span class="doccomment">///     (2020, 53, Friday)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -870,18 +869,18 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::{Weekday::*, macros::datetime};</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).weekday(), Tuesday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-02-01 0:00&quot;).weekday(), Friday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-03-01 0:00&quot;).weekday(), Friday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-04-01 0:00&quot;).weekday(), Monday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-05-01 0:00&quot;).weekday(), Wednesday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-06-01 0:00&quot;).weekday(), Saturday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-07-01 0:00&quot;).weekday(), Monday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-08-01 0:00&quot;).weekday(), Thursday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-09-01 0:00&quot;).weekday(), Sunday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-10-01 0:00&quot;).weekday(), Tuesday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-11-01 0:00&quot;).weekday(), Friday);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-01 0:00&quot;).weekday(), Sunday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).weekday(), Tuesday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-02-01 0:00).weekday(), Friday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-03-01 0:00).weekday(), Friday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-04-01 0:00).weekday(), Monday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-05-01 0:00).weekday(), Wednesday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-06-01 0:00).weekday(), Saturday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-07-01 0:00).weekday(), Monday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-08-01 0:00).weekday(), Thursday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-09-01 0:00).weekday(), Sunday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-10-01 0:00).weekday(), Tuesday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-11-01 0:00).weekday(), Friday);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-01 0:00).weekday(), Sunday);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">weekday</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Weekday</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">weekday</span>()
@@ -894,10 +893,10 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;-4713-11-24 0:00&quot;).to_julian_day(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2000-01-01 0:00&quot;).to_julian_day(), 2_451_545);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).to_julian_day(), 2_458_485);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-12-31 0:00&quot;).to_julian_day(), 2_458_849);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(-4713-11-24 0:00).to_julian_day(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2000-01-01 0:00).to_julian_day(), 2_451_545);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).to_julian_day(), 2_458_485);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-12-31 0:00).to_julian_day(), 2_458_849);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_julian_day</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
         <span class="self">self</span>.<span class="ident">date</span>.<span class="ident">to_julian_day</span>()
@@ -909,8 +908,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00:00&quot;).as_hms(), (0, 0, 0));</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 23:59:59&quot;).as_hms(), (23, 59, 59));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00:00).as_hms(), (0, 0, 0));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 23:59:59).as_hms(), (23, 59, 59));</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">as_hms</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">u8</span>) {
         <span class="self">self</span>.<span class="ident">time</span>.<span class="ident">as_hms</span>()
@@ -920,9 +919,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00:00&quot;).as_hms_milli(), (0, 0, 0, 0));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00:00).as_hms_milli(), (0, 0, 0, 0));</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 23:59:59.999&quot;).as_hms_milli(),</span>
+    <span class="doccomment">///     datetime!(2020-01-01 23:59:59.999).as_hms_milli(),</span>
     <span class="doccomment">///     (23, 59, 59, 999)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -934,9 +933,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00:00&quot;).as_hms_micro(), (0, 0, 0, 0));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00:00).as_hms_micro(), (0, 0, 0, 0));</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 23:59:59.999_999&quot;).as_hms_micro(),</span>
+    <span class="doccomment">///     datetime!(2020-01-01 23:59:59.999_999).as_hms_micro(),</span>
     <span class="doccomment">///     (23, 59, 59, 999_999)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -948,9 +947,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2020-01-01 0:00:00&quot;).as_hms_nano(), (0, 0, 0, 0));</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2020-01-01 0:00:00).as_hms_nano(), (0, 0, 0, 0));</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 23:59:59.999_999_999&quot;).as_hms_nano(),</span>
+    <span class="doccomment">///     datetime!(2020-01-01 23:59:59.999_999_999).as_hms_nano(),</span>
     <span class="doccomment">///     (23, 59, 59, 999_999_999)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -964,8 +963,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).hour(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 23:59:59&quot;).hour(), 23);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).hour(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 23:59:59).hour(), 23);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">hour</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">time</span>.<span class="ident">hour</span>()
@@ -977,8 +976,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).minute(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 23:59:59&quot;).minute(), 59);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).minute(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 23:59:59).minute(), 59);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">minute</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">time</span>.<span class="ident">minute</span>()
@@ -990,8 +989,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).second(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 23:59:59&quot;).second(), 59);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).second(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 23:59:59).second(), 59);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">second</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">time</span>.<span class="ident">second</span>()
@@ -1003,8 +1002,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).millisecond(), 0);</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 23:59:59.999&quot;).millisecond(), 999);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).millisecond(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 23:59:59.999).millisecond(), 999);</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">millisecond</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16</span> {
         <span class="self">self</span>.<span class="ident">time</span>.<span class="ident">millisecond</span>()
@@ -1016,9 +1015,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).microsecond(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).microsecond(), 0);</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 23:59:59.999_999&quot;).microsecond(),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 23:59:59.999_999).microsecond(),</span>
     <span class="doccomment">///     999_999</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -1032,9 +1031,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
-    <span class="doccomment">/// assert_eq!(datetime!(&quot;2019-01-01 0:00&quot;).nanosecond(), 0);</span>
+    <span class="doccomment">/// assert_eq!(datetime!(2019-01-01 0:00).nanosecond(), 0);</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 23:59:59.999_999_999&quot;).nanosecond(),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 23:59:59.999_999_999).nanosecond(),</span>
     <span class="doccomment">///     999_999_999,</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -1050,14 +1049,14 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::{datetime, offset};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;)</span>
-    <span class="doccomment">///         .assume_offset(offset!(&quot;UTC&quot;))</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00)</span>
+    <span class="doccomment">///         .assume_offset(offset!(UTC))</span>
     <span class="doccomment">///         .unix_timestamp(),</span>
     <span class="doccomment">///     1_546_300_800,</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;)</span>
-    <span class="doccomment">///         .assume_offset(offset!(&quot;-1&quot;))</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00)</span>
+    <span class="doccomment">///         .assume_offset(offset!(-1))</span>
     <span class="doccomment">///         .unix_timestamp(),</span>
     <span class="doccomment">///     1_546_304_400,</span>
     <span class="doccomment">/// );</span>
@@ -1075,7 +1074,7 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::datetime;</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2019-01-01 0:00&quot;).assume_utc().unix_timestamp(),</span>
+    <span class="doccomment">///     datetime!(2019-01-01 0:00).assume_utc().unix_timestamp(),</span>
     <span class="doccomment">///     1_546_300_800,</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
@@ -1096,8 +1095,8 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::{datetime, time};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 17:00&quot;).replace_time(time!(&quot;5:00&quot;)),</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 5:00&quot;)</span>
+    <span class="doccomment">///     datetime!(2020-01-01 17:00).replace_time(time!(5:00)),</span>
+    <span class="doccomment">///     datetime!(2020-01-01 5:00)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;This method does not mutate the original `PrimitiveDateTime`.&quot;</span>]</span>
@@ -1110,8 +1109,8 @@
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::macros::{datetime, date};</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-01 12:00&quot;).replace_date(date!(&quot;2020-01-30&quot;)),</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-30 12:00&quot;)</span>
+    <span class="doccomment">///     datetime!(2020-01-01 12:00).replace_date(date!(2020-01-30)),</span>
+    <span class="doccomment">///     datetime!(2020-01-30 12:00)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">must_use</span> <span class="op">=</span> <span class="string">&quot;This method does not mutate the original `PrimitiveDateTime`.&quot;</span>]</span>
@@ -1183,7 +1182,7 @@
     <span class="doccomment">/// # use time::{format_description, macros::datetime};</span>
     <span class="doccomment">/// let format = format_description::parse(&quot;[year]-[month]-[day] [hour]:[minute]:[second]&quot;)?;</span>
     <span class="doccomment">/// assert_eq!(</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-02 03:04:05&quot;).format(&amp;format)?,</span>
+    <span class="doccomment">///     datetime!(2020-01-02 03:04:05).format(&amp;format)?,</span>
     <span class="doccomment">///     &quot;2020-01-02 03:04:05&quot;</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// # Ok::&lt;_, time::Error&gt;(())</span>
@@ -1205,7 +1204,7 @@
     <span class="doccomment">/// let format = format_description::parse(&quot;[year]-[month]-[day] [hour]:[minute]:[second]&quot;)?;</span>
     <span class="doccomment">/// assert_eq!(</span>
     <span class="doccomment">///     PrimitiveDateTime::parse(&quot;2020-01-02 03:04:05&quot;, &amp;format)?,</span>
-    <span class="doccomment">///     datetime!(&quot;2020-01-02 03:04:05&quot;)</span>
+    <span class="doccomment">///     datetime!(2020-01-02 03:04:05)</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// # Ok::&lt;_, time::Error&gt;(())</span>
     <span class="doccomment">/// ```</span>
