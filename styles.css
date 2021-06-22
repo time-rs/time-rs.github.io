@@ -61,7 +61,7 @@ a .hover-underline::after {
     display: block;
     width: 0;
     margin: 0 auto;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid var(--foreground);
     transition: width 200ms;
 }
 
