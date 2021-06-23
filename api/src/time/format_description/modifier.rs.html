@@ -394,6 +394,13 @@
 <span id="394">394</span>
 <span id="395">395</span>
 <span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+<span id="403">403</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Various modifiers for components.</span>
 
@@ -407,7 +414,7 @@
 
 <span class="comment">// region: date modifiers</span>
 <span class="doccomment">/// Day of the month.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Day</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -425,7 +432,7 @@
 }
 
 <span class="doccomment">/// Month of the year.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Month</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -434,7 +441,7 @@
 }
 
 <span class="doccomment">/// Ordinal day of the year.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Ordinal</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -482,7 +489,7 @@
 }
 
 <span class="doccomment">/// Week within the year.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WeekNumber</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -500,7 +507,7 @@
 }
 
 <span class="doccomment">/// Year of the date.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Year</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -515,7 +522,7 @@
 
 <span class="comment">// region: time modifiers</span>
 <span class="doccomment">/// Hour of the day.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Hour</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -524,7 +531,7 @@
 }
 
 <span class="doccomment">/// Minute within the hour.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Minute</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -538,7 +545,7 @@
 }
 
 <span class="doccomment">/// Second within the minute.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Second</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -571,7 +578,7 @@
 }
 
 <span class="doccomment">/// Subsecond within the second.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Subsecond</span> {
     <span class="doccomment">/// How many digits are present in the component?</span>
     <span class="kw">pub</span> <span class="ident">digits</span>: <span class="ident">SubsecondDigits</span>,
@@ -580,7 +587,7 @@
 
 <span class="comment">// region: offset modifiers</span>
 <span class="doccomment">/// Hour of the UTC offset.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OffsetHour</span> {
     <span class="doccomment">/// Whether the `+` sign is present on positive values.</span>
     <span class="kw">pub</span> <span class="ident">sign_is_mandatory</span>: <span class="ident">bool</span>,
@@ -589,14 +596,14 @@
 }
 
 <span class="doccomment">/// Minute within the hour of the UTC offset.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OffsetMinute</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
 }
 
 <span class="doccomment">/// Second within the minute of the UTC offset.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OffsetSecond</span> {
     <span class="doccomment">/// The padding to obtain the minimum width.</span>
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
@@ -633,6 +640,13 @@
     <span class="ident">WeekdayRepr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Long</span>;
     <span class="ident">WeekNumberRepr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Iso</span>;
     <span class="ident">YearRepr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Full</span>;
+    <span class="ident">Weekday</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">repr</span>: <span class="ident">WeekdayRepr::default</span>(),
+        <span class="ident">one_indexed</span>: <span class="bool-val">true</span>,
+    };
+    <span class="ident">Period</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">is_uppercase</span>: <span class="bool-val">true</span>,
+    };
 }
 
 <span class="doccomment">/// The modifiers parsed for any given component. `None` indicates the modifier was not present.</span>
