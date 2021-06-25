@@ -1009,9 +1009,6 @@
 <span id="1009">1009</span>
 <span id="1010">1010</span>
 <span id="1011">1011</span>
-<span id="1012">1012</span>
-<span id="1013">1013</span>
-<span id="1014">1014</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
 <span class="kw">use</span> <span class="ident">core::convert</span>::{<span class="ident">TryFrom</span>, <span class="ident">TryInto</span>};
@@ -1705,9 +1702,6 @@
     <span class="doccomment">/// assert_eq!(Duration::MAX.saturating_mul(-2), Duration::MIN);</span>
     <span class="doccomment">/// assert_eq!(Duration::MIN.saturating_mul(-2), Duration::MAX);</span>
     <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This feature is `const fn` when using rustc &gt;= 1.47.</span>
-    <span class="attribute">#[<span class="ident">const_fn</span>(<span class="string">&quot;1.47&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">saturating_mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="comment">// Multiply nanoseconds as i64, because it cannot overflow that way.</span>
         <span class="kw">let</span> <span class="ident">total_nanos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">nanoseconds</span> <span class="kw">as</span> <span class="ident">i64</span> <span class="op">*</span> <span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>;
