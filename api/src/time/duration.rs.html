@@ -1012,8 +1012,6 @@
 <span id="1012">1012</span>
 <span id="1013">1013</span>
 <span id="1014">1014</span>
-<span id="1015">1015</span>
-<span id="1016">1016</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">core::cmp::Ordering</span>;
 <span class="kw">use</span> <span class="ident">core::convert</span>::{<span class="ident">TryFrom</span>, <span class="ident">TryInto</span>};
@@ -1614,7 +1612,7 @@
         <span class="prelude-val">Some</span>(<span class="self">Self</span><span class="ident">::new_unchecked</span>(<span class="ident">seconds</span>, <span class="ident">nanoseconds</span>))
     }
 
-    <span class="doccomment">/// Computes `self / rhs`, returning `None` if `rhs == 0`.</span>
+    <span class="doccomment">/// Computes `self / rhs`, returning `None` if `rhs == 0` or if the result would overflow.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// # use time::ext::NumericalDuration;</span>
@@ -1622,15 +1620,12 @@
     <span class="doccomment">/// assert_eq!(10.seconds().checked_div(-2), Some((-5).seconds()));</span>
     <span class="doccomment">/// assert_eq!(1.seconds().checked_div(0), None);</span>
     <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">const_fn</span>(<span class="string">&quot;1.47&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">checked_div</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">i32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">rhs</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
-            <span class="kw">return</span> <span class="prelude-val">None</span>;
-        }
-
-        <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">seconds</span> <span class="op">/</span> (<span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>);
+        <span class="kw">let</span> <span class="ident">seconds</span> <span class="op">=</span> <span class="macro">const_try_opt!</span>(<span class="self">self</span>.<span class="ident">seconds</span>.<span class="ident">checked_div</span>(<span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>));
         <span class="kw">let</span> <span class="ident">carry</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">seconds</span> <span class="op">-</span> <span class="ident">seconds</span> <span class="op">*</span> (<span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>);
-        <span class="kw">let</span> <span class="ident">extra_nanos</span> <span class="op">=</span> <span class="ident">carry</span> <span class="op">*</span> <span class="number">1_000_000_000</span> <span class="op">/</span> (<span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>);
-        <span class="kw">let</span> <span class="ident">nanoseconds</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">nanoseconds</span> <span class="op">/</span> <span class="ident">rhs</span> <span class="op">+</span> (<span class="ident">extra_nanos</span> <span class="kw">as</span> <span class="ident">i32</span>);
+        <span class="kw">let</span> <span class="ident">extra_nanos</span> <span class="op">=</span> <span class="macro">const_try_opt!</span>((<span class="ident">carry</span> <span class="op">*</span> <span class="number">1_000_000_000</span>).<span class="ident">checked_div</span>(<span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">i64</span>));
+        <span class="kw">let</span> <span class="ident">nanoseconds</span> <span class="op">=</span> <span class="macro">const_try_opt!</span>(<span class="self">self</span>.<span class="ident">nanoseconds</span>.<span class="ident">checked_div</span>(<span class="ident">rhs</span>)) <span class="op">+</span> (<span class="ident">extra_nanos</span> <span class="kw">as</span> <span class="ident">i32</span>);
 
         <span class="prelude-val">Some</span>(<span class="self">Self</span><span class="ident">::new_unchecked</span>(<span class="ident">seconds</span>, <span class="ident">nanoseconds</span>))
     }
@@ -1763,6 +1758,7 @@
             <span class="kw">match</span> <span class="ident">original</span>.<span class="ident">subsec_nanos</span>().<span class="ident">try_into</span>() {
                 <span class="prelude-val">Ok</span>(<span class="ident">nanoseconds</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">nanoseconds</span>,
                 <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="comment">// TODO return error just in case?</span>
                     <span class="macro">unreachable!</span>(<span class="string">&quot;bug in stdlib: nanoseconds are always in range 0..1_000_000_000&quot;</span>)
                 }
             },

@@ -318,7 +318,7 @@
         } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">duration</span>.<span class="ident">is_positive</span>() {
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">checked_add</span>(<span class="ident">duration</span>.<span class="ident">abs_std</span>()).<span class="ident">map</span>(<span class="self">Self</span>)
         } <span class="kw">else</span> {
-            <span class="comment">// duration.is_negative()</span>
+            <span class="macro">debug_assert!</span>(<span class="ident">duration</span>.<span class="ident">is_negative</span>());
             <span class="self">self</span>.<span class="number">0</span>.<span class="ident">checked_sub</span>(<span class="ident">duration</span>.<span class="ident">abs_std</span>()).<span class="ident">map</span>(<span class="self">Self</span>)
         }
     }
