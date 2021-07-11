@@ -164,6 +164,9 @@
 <span id="164">164</span>
 <span id="165">165</span>
 <span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Part of a format description.</span>
 
@@ -284,6 +287,7 @@
             <span class="self">Self</span><span class="ident">::Month</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::Month</span>(<span class="ident">modifier::Month</span> {
                 <span class="ident">padding</span>: <span class="ident">modifiers</span>.<span class="ident">padding</span>.<span class="ident">unwrap_or_default</span>(),
                 <span class="ident">repr</span>: <span class="ident">modifiers</span>.<span class="ident">month_repr</span>.<span class="ident">unwrap_or_default</span>(),
+                <span class="ident">case_sensitive</span>: <span class="ident">modifiers</span>.<span class="ident">case_sensitive</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>),
             }),
             <span class="self">Self</span><span class="ident">::Ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::Ordinal</span>(<span class="ident">modifier::Ordinal</span> {
                 <span class="ident">padding</span>: <span class="ident">modifiers</span>.<span class="ident">padding</span>.<span class="ident">unwrap_or_default</span>(),
@@ -291,6 +295,7 @@
             <span class="self">Self</span><span class="ident">::Weekday</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::Weekday</span>(<span class="ident">modifier::Weekday</span> {
                 <span class="ident">repr</span>: <span class="ident">modifiers</span>.<span class="ident">weekday_repr</span>.<span class="ident">unwrap_or_default</span>(),
                 <span class="ident">one_indexed</span>: <span class="ident">modifiers</span>.<span class="ident">weekday_is_one_indexed</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>),
+                <span class="ident">case_sensitive</span>: <span class="ident">modifiers</span>.<span class="ident">case_sensitive</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>),
             }),
             <span class="self">Self</span><span class="ident">::WeekNumber</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::WeekNumber</span>(<span class="ident">modifier::WeekNumber</span> {
                 <span class="ident">padding</span>: <span class="ident">modifiers</span>.<span class="ident">padding</span>.<span class="ident">unwrap_or_default</span>(),
@@ -311,6 +316,7 @@
             }),
             <span class="self">Self</span><span class="ident">::Period</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::Period</span>(<span class="ident">modifier::Period</span> {
                 <span class="ident">is_uppercase</span>: <span class="ident">modifiers</span>.<span class="ident">period_is_uppercase</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>),
+                <span class="ident">case_sensitive</span>: <span class="ident">modifiers</span>.<span class="ident">case_sensitive</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>),
             }),
             <span class="self">Self</span><span class="ident">::Second</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Component::Second</span>(<span class="ident">modifier::Second</span> {
                 <span class="ident">padding</span>: <span class="ident">modifiers</span>.<span class="ident">padding</span>.<span class="ident">unwrap_or_default</span>(),

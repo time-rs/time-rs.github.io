@@ -450,6 +450,7 @@
 <span id="450">450</span>
 <span id="451">451</span>
 <span id="452">452</span>
+<span id="453">453</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Differential formats for serde.</span>
 <span class="comment">// This also includes the serde implementations for all types. This doesn&#39;t need to be externally</span>
@@ -489,6 +490,7 @@
     <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Month</span>(<span class="ident">modifier::Month</span> {
         <span class="ident">repr</span>: <span class="ident">modifier::MonthRepr::Numerical</span>,
         <span class="ident">padding</span>: <span class="ident">modifier::Padding::Zero</span>,
+        <span class="ident">case_sensitive</span>: <span class="bool-val">true</span>,
     })),
     <span class="ident">FormatItem::Literal</span>(<span class="string">b&quot;-&quot;</span>),
     <span class="ident">FormatItem::Component</span>(<span class="ident">Component::Day</span>(<span class="ident">modifier::Day</span> {
