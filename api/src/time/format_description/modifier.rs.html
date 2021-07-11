@@ -459,6 +459,24 @@
 <span id="459">459</span>
 <span id="460">460</span>
 <span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
+<span id="465">465</span>
+<span id="466">466</span>
+<span id="467">467</span>
+<span id="468">468</span>
+<span id="469">469</span>
+<span id="470">470</span>
+<span id="471">471</span>
+<span id="472">472</span>
+<span id="473">473</span>
+<span id="474">474</span>
+<span id="475">475</span>
+<span id="476">476</span>
+<span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Various modifiers for components.</span>
 
@@ -499,6 +517,8 @@
     <span class="kw">pub</span> <span class="ident">padding</span>: <span class="ident">Padding</span>,
     <span class="doccomment">/// What form of representation should be used?</span>
     <span class="kw">pub</span> <span class="ident">repr</span>: <span class="ident">MonthRepr</span>,
+    <span class="doccomment">/// Is the value case sensitive when parsing?</span>
+    <span class="kw">pub</span> <span class="ident">case_sensitive</span>: <span class="ident">bool</span>,
 }
 
 <span class="doccomment">/// Ordinal day of the year.</span>
@@ -534,9 +554,9 @@
     <span class="doccomment">/// What form of representation should be used?</span>
     <span class="kw">pub</span> <span class="ident">repr</span>: <span class="ident">WeekdayRepr</span>,
     <span class="doccomment">/// When using a numerical representation, should it be zero or one-indexed?</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This setting has no effect on textual representations.</span>
     <span class="kw">pub</span> <span class="ident">one_indexed</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Is the value case sensitive when parsing?</span>
+    <span class="kw">pub</span> <span class="ident">case_sensitive</span>: <span class="ident">bool</span>,
 }
 
 <span class="doccomment">/// The representation used for the week number.</span>
@@ -611,6 +631,10 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Period</span> {
     <span class="doccomment">/// Is the period uppercase or lowercase?</span>
     <span class="kw">pub</span> <span class="ident">is_uppercase</span>: <span class="ident">bool</span>,
+    <span class="doccomment">/// Is the value case sensitive when parsing?</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that when `false`, the `is_uppercase` field has no effect on parsing behavior.</span>
+    <span class="kw">pub</span> <span class="ident">case_sensitive</span>: <span class="ident">bool</span>,
 }
 
 <span class="doccomment">/// Second within the minute.</span>
@@ -728,12 +752,14 @@
     <span class="ident">Month</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">padding</span>: <span class="ident">Padding::default</span>(),
         <span class="ident">repr</span>: <span class="ident">MonthRepr::default</span>(),
+        <span class="ident">case_sensitive</span>: <span class="bool-val">true</span>,
     };
     <span class="ident">Ordinal</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">padding</span>: <span class="ident">Padding::default</span>() };
     <span class="ident">WeekdayRepr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Long</span>;
     <span class="ident">Weekday</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">repr</span>: <span class="ident">WeekdayRepr::default</span>(),
         <span class="ident">one_indexed</span>: <span class="bool-val">true</span>,
+        <span class="ident">case_sensitive</span>: <span class="bool-val">true</span>,
     };
     <span class="ident">WeekNumberRepr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::Iso</span>;
     <span class="ident">WeekNumber</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
@@ -752,7 +778,10 @@
         <span class="ident">is_12_hour_clock</span>: <span class="bool-val">false</span>,
     };
     <span class="ident">Minute</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">padding</span>: <span class="ident">Padding::default</span>() };
-    <span class="ident">Period</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">is_uppercase</span>: <span class="bool-val">true</span> };
+    <span class="ident">Period</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">is_uppercase</span>: <span class="bool-val">true</span>,
+        <span class="ident">case_sensitive</span>: <span class="bool-val">true</span>,
+    };
     <span class="ident">Second</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">padding</span>: <span class="ident">Padding::default</span>() };
     <span class="ident">SubsecondDigits</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span><span class="ident">::OneOrMore</span>;
     <span class="ident">Subsecond</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">Self</span> { <span class="ident">digits</span>: <span class="ident">SubsecondDigits::default</span>() };
@@ -780,6 +809,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">year_repr</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">YearRepr</span><span class="op">&gt;</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">year_is_iso_week_based</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">sign_is_mandatory</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">case_sensitive</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Modifiers</span> {
@@ -847,6 +877,12 @@
                 <span class="op">|</span> (<span class="string">b&quot;year&quot;</span>, <span class="string">b&quot;padding:none&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">padding</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Padding::None</span>),
                 (<span class="string">b&quot;hour&quot;</span>, <span class="string">b&quot;repr:24&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">hour_is_12_hour_clock</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
                 (<span class="string">b&quot;hour&quot;</span>, <span class="string">b&quot;repr:12&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">hour_is_12_hour_clock</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
+                (<span class="string">b&quot;month&quot;</span>, <span class="string">b&quot;case_sensitive:true&quot;</span>)
+                <span class="op">|</span> (<span class="string">b&quot;period&quot;</span>, <span class="string">b&quot;case_sensitive:true&quot;</span>)
+                <span class="op">|</span> (<span class="string">b&quot;weekday&quot;</span>, <span class="string">b&quot;case_sensitive:true&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">case_sensitive</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">true</span>),
+                (<span class="string">b&quot;month&quot;</span>, <span class="string">b&quot;case_sensitive:false&quot;</span>)
+                <span class="op">|</span> (<span class="string">b&quot;period&quot;</span>, <span class="string">b&quot;case_sensitive:false&quot;</span>)
+                <span class="op">|</span> (<span class="string">b&quot;weekday&quot;</span>, <span class="string">b&quot;case_sensitive:false&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">case_sensitive</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="bool-val">false</span>),
                 (<span class="string">b&quot;month&quot;</span>, <span class="string">b&quot;repr:numerical&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">month_repr</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">MonthRepr::Numerical</span>),
                 (<span class="string">b&quot;month&quot;</span>, <span class="string">b&quot;repr:long&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">month_repr</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">MonthRepr::Long</span>),
                 (<span class="string">b&quot;month&quot;</span>, <span class="string">b&quot;repr:short&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">modifiers</span>.<span class="ident">month_repr</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">MonthRepr::Short</span>),

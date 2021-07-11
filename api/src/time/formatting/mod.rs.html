@@ -429,6 +429,17 @@
 <span id="429">429</span>
 <span id="430">430</span>
 <span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Formatting for various types.</span>
 
@@ -624,7 +635,11 @@
 <span class="kw">fn</span> <span class="ident">fmt_month</span>(
     <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">impl</span> <span class="ident">io::Write</span>,
     <span class="ident">date</span>: <span class="ident">Date</span>,
-    <span class="ident">modifier::Month</span> { <span class="ident">padding</span>, <span class="ident">repr</span> }: <span class="ident">modifier::Month</span>,
+    <span class="ident">modifier::Month</span> {
+        <span class="ident">padding</span>,
+        <span class="ident">repr</span>,
+        <span class="ident">case_sensitive</span>: <span class="ident">_case_sensitive</span>, <span class="comment">// no effect on formatting</span>
+    }: <span class="ident">modifier::Month</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">io::Error</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">repr</span> {
         <span class="ident">modifier::MonthRepr::Numerical</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">format_number</span>(<span class="ident">output</span>, <span class="ident">date</span>.<span class="ident">month</span>() <span class="kw">as</span> <span class="ident">u8</span>, <span class="ident">padding</span>, <span class="number">2</span>),
@@ -646,7 +661,11 @@
 <span class="kw">fn</span> <span class="ident">fmt_weekday</span>(
     <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">impl</span> <span class="ident">io::Write</span>,
     <span class="ident">date</span>: <span class="ident">Date</span>,
-    <span class="ident">modifier::Weekday</span> { <span class="ident">repr</span>, <span class="ident">one_indexed</span> }: <span class="ident">modifier::Weekday</span>,
+    <span class="ident">modifier::Weekday</span> {
+        <span class="ident">repr</span>,
+        <span class="ident">one_indexed</span>,
+        <span class="ident">case_sensitive</span>: <span class="ident">_case_sensitive</span>, <span class="comment">// no effect on formatting</span>
+    }: <span class="ident">modifier::Weekday</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">io::Error</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">repr</span> {
         <span class="ident">modifier::WeekdayRepr::Short</span> <span class="op">=</span><span class="op">&gt;</span> {
@@ -762,7 +781,10 @@
 <span class="kw">fn</span> <span class="ident">fmt_period</span>(
     <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">impl</span> <span class="ident">io::Write</span>,
     <span class="ident">time</span>: <span class="ident">Time</span>,
-    <span class="ident">modifier::Period</span> { <span class="ident">is_uppercase</span> }: <span class="ident">modifier::Period</span>,
+    <span class="ident">modifier::Period</span> {
+        <span class="ident">is_uppercase</span>,
+        <span class="ident">case_sensitive</span>: <span class="ident">_case_sensitive</span>, <span class="comment">// no effect on formatting</span>
+    }: <span class="ident">modifier::Period</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">io::Error</span><span class="op">&gt;</span> {
     <span class="kw">match</span> (<span class="ident">time</span>.<span class="ident">hour</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="number">12</span>, <span class="ident">is_uppercase</span>) {
         (<span class="bool-val">false</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">output</span>.<span class="ident">write</span>(<span class="string">b&quot;am&quot;</span>),
