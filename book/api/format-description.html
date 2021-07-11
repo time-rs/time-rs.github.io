@@ -238,6 +238,7 @@ no padding at all. The default is to pad the value with zeroes.</p>
 Alternatives are <em>long</em> and <em>short</em>, both of which are textual formats and have no padding. The
 long format is the full English name of the month, while the short format is the first three
 letters of it.</p>
+<p>When parsing, there is the option to consume text-based formats case-insensitively.</p>
 </li>
 <li>
 <p><strong>Whole hours offset from UTC</strong></p>
@@ -273,6 +274,7 @@ no padding at all. The default is to pad the value with zeroes.</p>
 <p><img src="../diagrams/period.svg#rr" alt="syntax for period component" /></p>
 <p>Users have the option to choose whether the value is uppercase or lowercase. This component is
 typically used in conjunction with the hour of the day with <code>repr:12</code>.</p>
+<p>When parsing, there is the option to consume text-based formats case-insensitively.</p>
 </li>
 <li>
 <p><strong>Second within the clock minute</strong></p>
@@ -309,6 +311,7 @@ the weekday's full name in English, while the short is the first three letters. 
 <em>sunday</em> and <em>monday</em> representations, which are numerical. These formats are either zero to six
 or one to seven (depending on whether <code>one_indexed</code> is false or true, respectively), with the
 named day being at the start of that range.</p>
+<p>When parsing, there is the option to consume text-based formats case-insensitively.</p>
 </li>
 <li>
 <p><strong>Year</strong></p>
