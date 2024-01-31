@@ -1,0 +1,28 @@
+name: Deploy
+
+env:
+  REPO: time-rs/time-rs.github.io
+  WORKFLOW: build-website.yaml
+  GH_TOKEN: ${{ secrets.WEBSITE_PUBLISHING }}
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+
+    steps:
+      - name: Trigger deploy
+        id: trigger
+        run: |
+          gh workflow run --repo ${{ env.REPO }} ${{ env.WORKFLOW }}
+          sleep 3 # Let the run be created
+          echo "RUN_ID=$(gh run list --repo ${{ env.REPO }} --json databaseId --workflow ${{ env.WORKFLOW }} --limit 1 | jq -r '.[0].databaseId')" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for deployment
+        run: gh run watch --repo ${{ env.REPO }} ${{ steps.trigger.outputs.RUN_ID }} --interval 1 --exit-status

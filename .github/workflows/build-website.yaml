@@ -1,0 +1,132 @@
+name: Build website
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build-docs:
+    name: Build docs (${{ matrix.kind }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        kind: [internal, public]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: time-rs/time
+
+      - name: Cache cargo output
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install toolchain
+        uses: dtolnay/rust-toolchain@nightly
+
+      - name: Generate documentation
+        run: cargo doc -p time --all-features ${{ matrix.kind == 'internal' && '--document-private-items' || '' }}
+        env:
+          RUSTDOCFLAGS: --cfg __time_03_docs ${{ matrix.kind == 'internal' && '--document-hidden-items' || '' }} -Zunstable-options --generate-link-to-definition
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        id: docs-upload
+        with:
+          name: ${{ matrix.kind }}-docs
+          path: target/doc/
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 9
+
+  build-book:
+    name: Build book
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: time-rs/book
+
+      - name: Check for typos
+        uses: crate-ci/typos@master
+
+      - name: Install mdbook
+        uses: taiki-e/install-action@mdbook
+
+      - name: Build diagrams
+        run: |
+          pip install -r diagrams/requirements.txt
+          mkdir src/diagrams
+          python diagrams/diagrams.py
+
+      - name: Build book
+        run: mdbook build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        id: book-upload
+        with:
+          name: book
+          path: book/
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 9
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [build-docs, build-book]
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            website
+
+      - name: Download internal docs
+        uses: actions/download-artifact@v4
+        with:
+          name: internal-docs
+          path: website/internal-api
+
+      - name: Download public docs
+        uses: actions/download-artifact@v4
+        with:
+          name: public-docs
+          path: website/api
+
+      - name: Download book
+        uses: actions/download-artifact@v4
+        with:
+          name: book
+          path: website/book
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v4
+        with:
+          name: |
+            internal-docs
+            public-docs
+            book
+            github-pages
+          failOnError: false
+        if: always()
+        continue-on-error: true
