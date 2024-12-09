@@ -27,7 +27,7 @@ jobs:
       - name: Generate documentation
         run: cargo doc -p time --all-features ${{ matrix.kind == 'internal' && '--document-private-items' || '' }}
         env:
-          RUSTDOCFLAGS: --cfg __time_03_docs ${{ matrix.kind == 'internal' && '--document-hidden-items' || '' }} -Zunstable-options --generate-link-to-definition
+          RUSTDOCFLAGS: --cfg docsrs ${{ matrix.kind == 'internal' && '--document-hidden-items' || '' }} -Zunstable-options --generate-link-to-definition
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
