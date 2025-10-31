@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: time-rs/time
 
@@ -25,12 +25,12 @@ jobs:
         uses: dtolnay/rust-toolchain@nightly
 
       - name: Generate documentation
-        run: cargo doc -p time --all-features ${{ matrix.kind == 'internal' && '--document-private-items' || '' }}
+        run: cargo doc --all-features --workspace --no-deps ${{ matrix.kind == 'internal' && '--document-private-items' || '' }}
         env:
           RUSTDOCFLAGS: --cfg docsrs ${{ matrix.kind == 'internal' && '--document-hidden-items' || '' }} -Zunstable-options --generate-link-to-definition
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         id: docs-upload
         with:
           name: ${{ matrix.kind }}-docs
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: time-rs/book
 
@@ -65,7 +65,7 @@ jobs:
         run: mdbook build
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         id: book-upload
         with:
           name: book
@@ -87,31 +87,31 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           sparse-checkout: |
             website
 
       - name: Download internal docs
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: internal-docs
           path: website/internal-api
 
       - name: Download public docs
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: public-docs
           path: website/api
 
       - name: Download book
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: book
           path: website/book
 
       - name: Upload website
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: website
 
@@ -120,7 +120,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v4
+        uses: geekyeggo/delete-artifact@v5
         with:
           name: |
             internal-docs
